@@ -1,8 +1,3 @@
-# Use of this source code is governed by the MIT license.
-from . import _htmlparser
-
-__license__ = "MIT"
-
 import re
 import sys
 import warnings
@@ -19,11 +14,24 @@ from campbells.element import (
     nonwhitespace_re,
 )
 
+from ._htmlparser import HTMLParserTreeBuilder
+
 __all__ = [
-    "HTMLTreeBuilder",
-    "SAXTreeBuilder",
-    "TreeBuilder",
+    "FAST",
+    "PERMISSIVE",
+    "STRICT",
+    "XML",
+    "HTML",
+    "HTML_5",
+    "XMLParsedAsHTMLWarning",
     "TreeBuilderRegistry",
+    "builder_registry",
+    "TreeBuilder",
+    "SAXTreeBuilder",
+    "HTMLTreeBuilder",
+    "DetectsXMLParsedAsHTML",
+    "ParserRejectedMarkup",
+    "register_treebuilders_from",
 ]
 
 # Some useful features for a TreeBuilder to have.
@@ -658,19 +666,6 @@ class DetectsXMLParsedAsHTML:
             self._warn()
 
 
-def register_treebuilders_from(module):
-    """Copy TreeBuilders from the given module into this module."""
-    this_module = sys.modules[__name__]
-    for name in module.__all__:
-        obj = getattr(module, name)
-
-        if issubclass(obj, TreeBuilder):
-            setattr(this_module, name, obj)
-            this_module.__all__.append(name)
-            # Register the builder while we're at it.
-            this_module.builder_registry.register(obj)
-
-
 class ParserRejectedMarkup(Exception):
     """An Exception to be raised when the underlying parser simply
     refuses to parse the given markup.
@@ -686,12 +681,27 @@ class ParserRejectedMarkup(Exception):
         super().__init__(message_or_exception)
 
 
+def register_treebuilders_from(module):
+    """Copy TreeBuilders from the given module into this module."""
+    this_module = sys.modules[__name__]
+    for name in module.__all__:
+        obj = getattr(module, name)
+
+        if issubclass(obj, TreeBuilder):
+            setattr(this_module, name, obj)
+            this_module.__all__.append(name)
+            # Register the builder while we're at it.
+            this_module.builder_registry.register(obj)
+
+
 # Builders are registered in reverse order of priority, so that custom
 # builder registrations will take precedence. In general, we want lxml
 # to take precedence over html5lib, because it's faster. And we only
 # want to use HTMLParser as a last resort.
 
-register_treebuilders_from(_htmlparser)
+# Don't use dynamic namespace import for _htmlparser.HTMLParserTreeBuilder
+# register_treebuilders_from(_htmlparser)
+builder_registry.register(HTMLParserTreeBuilder)
 try:
     from . import _html5lib
 

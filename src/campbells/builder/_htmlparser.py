@@ -1,12 +1,5 @@
 """Use the HTMLParser library to parse HTML files that aren't too bad."""
 
-# Use of this source code is governed by the MIT license.
-__license__ = "MIT"
-
-__all__ = [
-    "HTMLParserTreeBuilder",
-]
-
 from html.parser import HTMLParser
 
 from campbells.builder import (
@@ -24,6 +17,12 @@ from campbells.element import (
     Doctype,
     ProcessingInstruction,
 )
+
+__all__ = [
+    "HTMLPARSER",
+    "BeautifulSoupHTMLParser",
+    "HTMLParserTreeBuilder",
+]
 
 HTMLPARSER = "html.parser"
 

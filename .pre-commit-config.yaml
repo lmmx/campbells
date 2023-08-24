@@ -38,6 +38,18 @@ repos:
     rev: v2.4.0
     hooks:
       - id: setup-cfg-fmt
+  # - repo: https://github.com/pylint-dev/pylint
+  #   rev: v3.0.0a6
+  #   hooks:
+  #     - id: pylint
+  #       # exclude: |
+  #       #     (?x)
+  #       #     ^pandas/tests  # keep excluded
+  #       #     |/_testing/  # keep excluded
+  #       #     |^pandas/util/_test_decorators\.py  # keep excluded
+  #       #     |^pandas/_version\.py  # keep excluded
+  #       #     |^pandas/conftest\.py  # keep excluded
+  #       # args: [--disable=all, --enable=redefined-outer-name]
   - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
     hooks:
