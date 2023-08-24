@@ -10,13 +10,13 @@ import warnings
 import pytest
 
 from campbells import (
-    BeautifulStoneSoup,
     CampbellsSoup,
     GuessedAtParserWarning,
     MarkupResemblesLocatorWarning,
     dammit,
 )
-from campbells.builder import ParserRejectedMarkup, TreeBuilder, builder_registry
+from campbells.builder import builder_registry
+from campbells.builder.build import ParserRejectedMarkup, TreeBuilder
 from campbells.element import (
     PYTHON_SPECIFIC_ENCODINGS,
     Comment,

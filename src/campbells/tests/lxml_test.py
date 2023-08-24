@@ -11,7 +11,7 @@ from . import LXML_PRESENT, LXML_VERSION
 if LXML_PRESENT:
     from campbells.builder import LXMLTreeBuilder, LXMLTreeBuilderForXML
 
-from campbells import BeautifulStoneSoup, CampbellsSoup
+from campbells import CampbellsSoup
 from campbells.element import Comment, Doctype, SoupStrainer
 
 from . import (
@@ -56,15 +56,9 @@ class TestLXMLTreeBuilder(SoupTest, HTMLTreeBuilderSmokeTest):
         doctype = soup.contents[0]
         assert "" == doctype.strip()
 
-    def test_beautifulstonesoup_is_xml_parser(self):
-        # Make sure that the deprecated BSS class uses an xml builder
-        # if one is installed.
-        with warnings.catch_warnings(record=True) as w:
-            soup = BeautifulStoneSoup("<b />")
+    def test_xml_parser(self):
+        soup = CampbellsSoup("<b />", features="xml")
         assert "<b/>" == str(soup.b)
-        [warning] = w
-        assert warning.filename == __file__
-        assert "BeautifulStoneSoup class is deprecated" in str(warning.message)
 
     def test_tracking_line_numbers(self):
         # The lxml TreeBuilder cannot keep track of line numbers from

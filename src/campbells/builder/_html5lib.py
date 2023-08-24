@@ -8,7 +8,7 @@ import warnings
 import html5lib
 from html5lib.constants import namespaces, prefixes
 
-from campbells.builder import (
+from campbells.builder.build import (
     HTML,
     HTML_5,
     PERMISSIVE,

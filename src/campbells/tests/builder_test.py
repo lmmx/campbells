@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 import pytest
 
-from campbells.builder import DetectsXMLParsedAsHTML
+from campbells.builder.build import DetectsXMLParsedAsHTML
 
 
 class TestDetectsXMLParsedAsHTML:

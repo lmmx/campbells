@@ -6,12 +6,8 @@ import warnings
 
 import pytest
 
-from campbells.builder import (
-    HTMLParserTreeBuilder,
-    ParserRejectedMarkup,
-    XMLParsedAsHTMLWarning,
-)
-from campbells.builder._htmlparser import CampbellsSoupHTMLParser
+from campbells.builder._htmlparser import CampbellsSoupHTMLParser, HTMLParserTreeBuilder
+from campbells.builder.build import ParserRejectedMarkup, XMLParsedAsHTMLWarning
 
 from . import HTMLTreeBuilderSmokeTest, SoupTest
 

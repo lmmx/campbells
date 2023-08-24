@@ -1,21 +1,14 @@
 """Helper classes for tests."""
 
-# Use of this source code is governed by the MIT license.
-__license__ = "MIT"
-
 import copy
-import functools
 import pickle
 import warnings
 
 import pytest
 
 from campbells import CampbellsSoup
-from campbells.builder import (
-    DetectsXMLParsedAsHTML,
-    HTMLParserTreeBuilder,
-    XMLParsedAsHTMLWarning,
-)
+from campbells.builder._htmlparser import HTMLParserTreeBuilder
+from campbells.builder.build import XMLParsedAsHTMLWarning
 from campbells.element import (
     PYTHON_SPECIFIC_ENCODINGS,
     CharsetMetaAttributeValue,
@@ -34,14 +27,14 @@ default_builder = HTMLParserTreeBuilder
 # @pytest.mark.skipIf on the following conditionals to skip them
 # if the libraries are not installed.
 try:
-    from soupsieve import SelectorSyntaxError
+    pass
 
     SOUP_SIEVE_PRESENT = True
 except ImportError:
     SOUP_SIEVE_PRESENT = False
 
 try:
-    import html5lib
+    pass
 
     HTML5LIB_PRESENT = True
 except ImportError:

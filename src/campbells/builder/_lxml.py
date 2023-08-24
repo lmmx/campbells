@@ -1,18 +1,9 @@
-__all__ = [
-    "LXMLTreeBuilderForXML",
-    "LXMLTreeBuilder",
-]
-
-try:
-    from collections.abc import Callable  # Python 3.6
-except ImportError:
-    from collections.abc import Callable
-
+from collections.abc import Callable
 from io import BytesIO, StringIO
 
 from lxml import etree
 
-from campbells.builder import (
+from campbells.builder.build import (
     FAST,
     HTML,
     PERMISSIVE,
@@ -30,6 +21,11 @@ from campbells.element import (
     ProcessingInstruction,
     XMLProcessingInstruction,
 )
+
+__all__ = [
+    "LXMLTreeBuilderForXML",
+    "LXMLTreeBuilder",
+]
 
 LXML = "lxml"
 
