@@ -12,7 +12,7 @@ import os
 
 import pytest
 
-from campbells import BeautifulSoup, ParserRejectedMarkup
+from campbells import CampbellsSoup, ParserRejectedMarkup
 
 try:
     import html5lib
@@ -52,7 +52,7 @@ class TestFuzz:
         css_selector, data = data[1:10], data[10:]
 
         try:
-            soup = BeautifulSoup(data[1:], features=parsers[idx])
+            soup = CampbellsSoup(data[1:], features=parsers[idx])
         except ParserRejectedMarkup:
             return
         except ValueError:
@@ -78,7 +78,7 @@ class TestFuzz:
     def test_rejected_markup(self, filename):
         markup = self.__markup(filename)
         with pytest.raises(ParserRejectedMarkup):
-            BeautifulSoup(markup, "html.parser")
+            CampbellsSoup(markup, "html.parser")
 
     # This class of error has to do with very deeply nested documents
     # which overflow the Python call stack when the tree is converted
@@ -101,7 +101,7 @@ class TestFuzz:
         # sufficient to demonstrate that the overflow problem has
         # been fixed.
         markup = self.__markup(filename)
-        BeautifulSoup(markup, "html.parser").encode()
+        CampbellsSoup(markup, "html.parser").encode()
 
     # This class of error has to do with very deeply nested documents
     # which overflow the Python call stack when the tree is converted
@@ -155,7 +155,7 @@ class TestFuzz:
     )
     def test_html5lib_parse_errors_without_css(self, filename):
         markup = self.__markup(filename)
-        print(BeautifulSoup(markup, "html5lib").encode())
+        print(CampbellsSoup(markup, "html5lib").encode())
 
     # This class of error represents problems with html5lib's parser,
     # not Beautiful Soup. I use

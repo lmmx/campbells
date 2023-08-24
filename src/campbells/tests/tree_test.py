@@ -13,7 +13,7 @@ import warnings
 
 import pytest
 
-from campbells import BeautifulSoup
+from campbells import CampbellsSoup
 from campbells.builder import HTMLParserTreeBuilder, builder_registry
 from campbells.element import (
     CData,
@@ -811,8 +811,8 @@ class TestTreeModification(SoupTest):
             soup.a.insert(0, soup.a)
 
     def test_insert_beautifulsoup_object_inserts_children(self):
-        """Inserting one BeautifulSoup object into another actually inserts all
-        of its children -- you'll never combine BeautifulSoup objects.
+        """Inserting one CampbellsSoup object into another actually inserts all
+        of its children -- you'll never combine CampbellsSoup objects.
         """
         soup = self.soup("<p>And now, a word:</p><p>And we're back.</p>")
 
@@ -821,7 +821,7 @@ class TestTreeModification(SoupTest):
         soup.insert(1, to_insert)
 
         for i in soup.descendants:
-            assert not isinstance(i, BeautifulSoup)
+            assert not isinstance(i, CampbellsSoup)
 
         p1, p2, p3, p4 = list(soup.children)
         assert "And now, a word:" == p1.string

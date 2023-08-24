@@ -10,7 +10,7 @@ import warnings
 
 import pytest
 
-from campbells import BeautifulSoup
+from campbells import CampbellsSoup
 from campbells.builder import (
     DetectsXMLParsedAsHTML,
     HTMLParserTreeBuilder,
@@ -101,7 +101,7 @@ class SoupTest:
     def soup(self, markup, **kwargs):
         """Build a Beautiful Soup object from markup."""
         builder = kwargs.pop("builder", self.default_builder)
-        return BeautifulSoup(markup, builder=builder, **kwargs)
+        return CampbellsSoup(markup, builder=builder, **kwargs)
 
     def document_for(self, markup, **kwargs):
         """Turn an HTML fragment into a document.
@@ -115,14 +115,14 @@ class SoupTest:
         the output markup is as expected.
         """
         builder = self.default_builder
-        obj = BeautifulSoup(to_parse, builder=builder)
+        obj = CampbellsSoup(to_parse, builder=builder)
         if compare_parsed_to is None:
             compare_parsed_to = to_parse
 
         # Verify that the documents come out the same.
         assert obj.decode() == self.document_for(compare_parsed_to)
 
-        # Also run some checks on the BeautifulSoup object itself:
+        # Also run some checks on the CampbellsSoup object itself:
 
         # Verify that every tag that was opened was eventually closed.
 
@@ -405,7 +405,7 @@ class HTMLTreeBuilderSmokeTest(TreeBuilderSmokeTest):
         tree = self.soup("<a><b>foo</a>")
         dumped = pickle.dumps(tree, 2)
         loaded = pickle.loads(dumped)
-        assert loaded.__class__ == BeautifulSoup
+        assert loaded.__class__ == CampbellsSoup
         assert loaded.decode() == tree.decode()
 
     def assertDoctypeHandled(self, doctype_fragment):
@@ -534,7 +534,7 @@ class HTMLTreeBuilderSmokeTest(TreeBuilderSmokeTest):
         """Make sure you can copy the tree builder.
 
         This is important because the builder is part of a
-        BeautifulSoup object, and we want to be able to copy that.
+        CampbellsSoup object, and we want to be able to copy that.
         """
         copy.deepcopy(self.default_builder)
 
@@ -1031,7 +1031,7 @@ Hello, world!
         assert '<a foo="bar">text</a>' == data.a.decode()
 
     def test_closing_tag_with_no_opening_tag(self):
-        # Without BeautifulSoup.open_tag_counter, the </span> tag will
+        # Without CampbellsSoup.open_tag_counter, the </span> tag will
         # cause _popToTag to be called over and over again as we look
         # for a <span> tag that wasn't there. The result is that 'text2'
         # will show up outside the body of the document.
@@ -1052,7 +1052,7 @@ class XMLTreeBuilderSmokeTest(TreeBuilderSmokeTest):
         tree = self.soup("<a><b>foo</a>")
         dumped = pickle.dumps(tree, 2)
         loaded = pickle.loads(dumped)
-        assert loaded.__class__ == BeautifulSoup
+        assert loaded.__class__ == CampbellsSoup
         assert loaded.decode() == tree.decode()
 
     def test_docstring_generated(self):
@@ -1119,7 +1119,7 @@ class XMLTreeBuilderSmokeTest(TreeBuilderSmokeTest):
   <script type="text/javascript">
   </script>
 """
-        soup = BeautifulSoup(doc, "lxml-xml")
+        soup = CampbellsSoup(doc, "lxml-xml")
         # lxml would have stripped this while parsing, but we can add
         # it later.
         soup.script.string = 'console.log("< < hey > > ");'

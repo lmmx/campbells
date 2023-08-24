@@ -18,7 +18,7 @@ documentation: http://www.crummy.com/software/BeautifulSoup/bs4/doc/
 
 __version__ = "0.1.1"
 
-__all__ = ["BeautifulSoup"]
+__all__ = ["CampbellsSoup"]
 
 import sys
 import warnings
@@ -46,7 +46,7 @@ from .element import (
     TemplateString,
 )
 from .main import (
-    BeautifulSoup,
+    CampbellsSoup,
     FeatureNotFound,
     GuessedAtParserWarning,
     MarkupResemblesLocatorWarning,
@@ -55,5 +55,5 @@ from .main import (
 
 # If this file is run as a script, act as an HTML pretty-printer.
 if __name__ == "__main__":
-    soup = BeautifulSoup(sys.stdin)
+    soup = CampbellsSoup(sys.stdin)
     print(soup.prettify())

@@ -67,16 +67,16 @@ class LXMLTreeBuilderForXML(TreeBuilder):
     # See: https://bugs.launchpad.net/lxml/+bug/1846906
 
     def initialize_soup(self, soup):
-        """Let the BeautifulSoup object know about the standard namespace
+        """Let the CampbellsSoup object know about the standard namespace
         mapping.
 
-        :param soup: A `BeautifulSoup`.
+        :param soup: A `CampbellsSoup`.
         """
         super().initialize_soup(soup)
         self._register_namespaces(self.DEFAULT_NSMAPS)
 
     def _register_namespaces(self, mapping):
-        """Let the BeautifulSoup object know about namespaces encountered
+        """Let the CampbellsSoup object know about namespaces encountered
         while parsing the document.
 
         This might be useful later on when creating CSS selectors.
@@ -94,7 +94,7 @@ class LXMLTreeBuilderForXML(TreeBuilder):
             # treat an un-prefixed namespace as the default, which
             # causes confusion in some cases.
             if key and key not in self.soup._namespaces:
-                # Let the BeautifulSoup object know about a new namespace.
+                # Let the CampbellsSoup object know about a new namespace.
                 # If there are multiple namespaces defined with the same
                 # prefix, the first one in the document takes precedence.
                 self.soup._namespaces[key] = value
@@ -266,7 +266,7 @@ class LXMLTreeBuilderForXML(TreeBuilder):
         elif len(nsmap) > 0:
             # A new namespace mapping has come into play.
 
-            # First, Let the BeautifulSoup object know about it.
+            # First, Let the CampbellsSoup object know about it.
             self._register_namespaces(nsmap)
 
             # Then, add it to our running list of inverted namespace

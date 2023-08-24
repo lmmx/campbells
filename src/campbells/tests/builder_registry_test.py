@@ -4,7 +4,7 @@ import warnings
 
 import pytest
 
-from campbells import BeautifulSoup
+from campbells import CampbellsSoup
 from campbells.builder import HTMLParserTreeBuilder, TreeBuilderRegistry
 from campbells.builder import builder_registry as registry
 
@@ -56,15 +56,15 @@ class TestBuiltInRegistry:
             # specifying a parser, but we'll ignore it.
 
             # You can pass in a string.
-            BeautifulSoup("", features="html")
+            CampbellsSoup("", features="html")
             # Or a list of strings.
-            BeautifulSoup("", features=["html", "fast"])
+            CampbellsSoup("", features=["html", "fast"])
             pass
 
         # You'll get an exception if BS can't find an appropriate
         # builder.
         with pytest.raises(ValueError):
-            BeautifulSoup("", features="no-such-feature")
+            CampbellsSoup("", features="no-such-feature")
 
 
 class TestRegistry:

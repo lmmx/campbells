@@ -20,14 +20,14 @@ from campbells.element import (
 
 __all__ = [
     "HTMLPARSER",
-    "BeautifulSoupHTMLParser",
+    "CampbellsSoupHTMLParser",
     "HTMLParserTreeBuilder",
 ]
 
 HTMLPARSER = "html.parser"
 
 
-class BeautifulSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
+class CampbellsSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
     """A subclass of the Python standard library's HTMLParser class, which
     listens for HTMLParser events and translates them into calls
     to Beautiful Soup's tree construction API.
@@ -296,10 +296,10 @@ class HTMLParserTreeBuilder(HTMLTreeBuilder):
         """Constructor.
 
         :param parser_args: Positional arguments to pass into
-            the BeautifulSoupHTMLParser constructor, once it's
+            the CampbellsSoupHTMLParser constructor, once it's
             invoked.
         :param parser_kwargs: Keyword arguments to pass into
-            the BeautifulSoupHTMLParser constructor, once it's
+            the CampbellsSoupHTMLParser constructor, once it's
             invoked.
         :param kwargs: Keyword arguments for the superclass constructor.
         """
@@ -376,10 +376,10 @@ class HTMLParserTreeBuilder(HTMLTreeBuilder):
 
     def feed(self, markup):
         """Run some incoming markup through some parsing process,
-        populating the `BeautifulSoup` object in self.soup.
+        populating the `CampbellsSoup` object in self.soup.
         """
         args, kwargs = self.parser_args
-        parser = BeautifulSoupHTMLParser(*args, **kwargs)
+        parser = CampbellsSoupHTMLParser(*args, **kwargs)
         parser.soup = self.soup
         try:
             parser.feed(markup)

@@ -11,7 +11,7 @@ from campbells.builder import (
     ParserRejectedMarkup,
     XMLParsedAsHTMLWarning,
 )
-from campbells.builder._htmlparser import BeautifulSoupHTMLParser
+from campbells.builder._htmlparser import CampbellsSoupHTMLParser
 
 from . import HTMLTreeBuilderSmokeTest, SoupTest
 
@@ -103,10 +103,10 @@ class TestHTMLParserTreeBuilder(SoupTest, HTMLTreeBuilderSmokeTest):
             assert "id" == soup.a["id"]
 
         assert_attribute(None, "url3")
-        assert_attribute(BeautifulSoupHTMLParser.REPLACE, "url3")
+        assert_attribute(CampbellsSoupHTMLParser.REPLACE, "url3")
 
         # You can ignore subsequent values in favor of the first.
-        assert_attribute(BeautifulSoupHTMLParser.IGNORE, "url1")
+        assert_attribute(CampbellsSoupHTMLParser.IGNORE, "url1")
 
         # And you can pass in a callable that does whatever you want.
         def accumulate(attrs, key, value):

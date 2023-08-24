@@ -417,10 +417,10 @@ class PageElement:
         if isinstance(new_child, str) and not isinstance(new_child, NavigableString):
             new_child = NavigableString(new_child)
 
-        from campbells import BeautifulSoup
+        from campbells import CampbellsSoup
 
-        if isinstance(new_child, BeautifulSoup):
-            # We don't want to end up with a situation where one BeautifulSoup
+        if isinstance(new_child, CampbellsSoup):
+            # We don't want to end up with a situation where one CampbellsSoup
             # object contains another. Insert the children one at a time.
             for subchild in list(new_child.contents):
                 self.insert(position, subchild)
@@ -1260,7 +1260,7 @@ class Tag(PageElement):
     ):
         """Basic constructor.
 
-        :param parser: A BeautifulSoup object.
+        :param parser: A CampbellsSoup object.
         :param builder: A TreeBuilder.
         :param name: The name of the tag.
         :param namespace: The URI of this Tag's XML namespace, if any.
@@ -2236,7 +2236,7 @@ class SoupStrainer:
 
     This is primarily used to underpin the find_* methods, but you can
     create one yourself and pass it in as `parse_only` to the
-    `BeautifulSoup` constructor, to parse a subset of a large
+    `CampbellsSoup` constructor, to parse a subset of a large
     document.
     """
 

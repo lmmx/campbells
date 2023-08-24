@@ -10,8 +10,8 @@ import warnings
 import pytest
 
 from campbells import (
-    BeautifulSoup,
     BeautifulStoneSoup,
+    CampbellsSoup,
     GuessedAtParserWarning,
     MarkupResemblesLocatorWarning,
     dammit,
@@ -80,24 +80,24 @@ class TestConstructor(SoupTest):
             convertEntities=True,
         )
         with warnings.catch_warnings(record=True):
-            soup = BeautifulSoup("", builder=Mock, **kwargs)
+            soup = CampbellsSoup("", builder=Mock, **kwargs)
         assert isinstance(soup.builder, Mock)
         assert dict(var="value") == soup.builder.called_with
         assert "prepared markup" == soup.builder.fed
 
         # You can also instantiate the TreeBuilder yourself. In this
         # case, that specific object is used and any keyword arguments
-        # to the BeautifulSoup constructor are ignored.
+        # to the CampbellsSoup constructor are ignored.
         builder = Mock(**kwargs)
         with warnings.catch_warnings(record=True) as w:
-            soup = BeautifulSoup(
+            soup = CampbellsSoup(
                 "",
                 builder=builder,
                 ignored_value=True,
             )
         msg = str(w[0].message)
         assert msg.startswith(
-            "Keyword arguments to the BeautifulSoup constructor will be ignored.",
+            "Keyword arguments to the CampbellsSoup constructor will be ignored.",
         )
         assert builder == soup.builder
         assert kwargs == builder.called_with
@@ -118,7 +118,7 @@ class TestConstructor(SoupTest):
         import re
 
         with pytest.raises(ParserRejectedMarkup) as exc_info:
-            BeautifulSoup("", builder=Mock)
+            CampbellsSoup("", builder=Mock)
         assert (
             "The markup you provided was rejected by the parser. Trying a different parser or a different encoding may help."
             in str(exc_info.value)
@@ -138,7 +138,7 @@ class TestConstructor(SoupTest):
 
         # TreeBuilder takes an argument called 'multi_valued_attributes'  which lets
         # you customize or disable this. As always, you can customize the TreeBuilder
-        # by passing in a keyword argument to the BeautifulSoup constructor.
+        # by passing in a keyword argument to the CampbellsSoup constructor.
         soup = self.soup(markup, builder=default_builder, multi_valued_attributes=None)
         assert " a class " == soup.a["class"]
 
@@ -250,14 +250,14 @@ class TestOutput(SoupTest):
         # But if you pass a Python internal encoding into decode(), or
         # omit the eventual_encoding altogether, the document
         # declaration won't mention any particular encoding.
-        soup = BeautifulSoup("<tag></tag>", "html.parser")
+        soup = CampbellsSoup("<tag></tag>", "html.parser")
         soup.is_xml = True
         assert f'<?xml version="1.0"?>\n<tag></tag>' == soup.decode(
             eventual_encoding=eventual_encoding,
         )
 
     def test(self):
-        # BeautifulSoup subclasses Tag and extends the decode() method.
+        # CampbellsSoup subclasses Tag and extends the decode() method.
         # Make sure the other Tag methods which call decode() call
         # it correctly.
         soup = self.soup("<tag></tag>")
@@ -268,7 +268,7 @@ class TestOutput(SoupTest):
 
 
 class TestWarnings(SoupTest):
-    # Note that some of the tests in this class create BeautifulSoup
+    # Note that some of the tests in this class create CampbellsSoup
     # objects directly rather than using self.soup(). That's
     # because SoupTest.soup is defined in a different file,
     # which will throw off the assertion in _assert_warning
@@ -285,16 +285,16 @@ class TestWarnings(SoupTest):
     def _assert_no_parser_specified(self, w):
         warning = self._assert_warning(w, GuessedAtParserWarning)
         message = str(warning.message)
-        assert message.startswith(BeautifulSoup.NO_PARSER_SPECIFIED_WARNING[:60])
+        assert message.startswith(CampbellsSoup.NO_PARSER_SPECIFIED_WARNING[:60])
 
     def test_warning_if_no_parser_specified(self):
         with warnings.catch_warnings(record=True) as w:
-            soup = BeautifulSoup("<a><b></b></a>")
+            soup = CampbellsSoup("<a><b></b></a>")
         self._assert_no_parser_specified(w)
 
     def test_warning_if_parser_specified_too_vague(self):
         with warnings.catch_warnings(record=True) as w:
-            soup = BeautifulSoup("<a><b></b></a>", "html")
+            soup = CampbellsSoup("<a><b></b></a>", "html")
         self._assert_no_parser_specified(w)
 
     def test_no_warning_if_explicit_parser_specified(self):
@@ -304,7 +304,7 @@ class TestWarnings(SoupTest):
 
     def test_parseOnlyThese_renamed_to_parse_only(self):
         with warnings.catch_warnings(record=True) as w:
-            soup = BeautifulSoup(
+            soup = CampbellsSoup(
                 "<a><b></b></a>",
                 "html.parser",
                 parseOnlyThese=SoupStrainer("b"),
@@ -318,7 +318,7 @@ class TestWarnings(SoupTest):
     def test_fromEncoding_renamed_to_from_encoding(self):
         with warnings.catch_warnings(record=True) as w:
             utf8 = b"\xc3\xa9"
-            soup = BeautifulSoup(utf8, "html.parser", fromEncoding="utf8")
+            soup = CampbellsSoup(utf8, "html.parser", fromEncoding="utf8")
         warning = self._assert_warning(w, DeprecationWarning)
         msg = str(warning.message)
         assert "fromEncoding" in msg
@@ -346,7 +346,7 @@ class TestWarnings(SoupTest):
         # A warning is issued if the "markup" looks like the name of
         # an HTML or text file, or a full path to a file on disk.
         with warnings.catch_warnings(record=True) as w:
-            soup = BeautifulSoup("markup" + extension, "html.parser")
+            soup = CampbellsSoup("markup" + extension, "html.parser")
             warning = self._assert_warning(w, MarkupResemblesLocatorWarning)
             assert "looks more like a filename" in str(warning.message)
 
@@ -362,7 +362,7 @@ class TestWarnings(SoupTest):
     def test_url_warning_with_bytes_url(self):
         url = b"http://www.crummybytes.com/"
         with warnings.catch_warnings(record=True) as warning_list:
-            soup = BeautifulSoup(url, "html.parser")
+            soup = CampbellsSoup(url, "html.parser")
         warning = self._assert_warning(warning_list, MarkupResemblesLocatorWarning)
         assert "looks more like a URL" in str(warning.message)
         assert url not in str(warning.message).encode("utf8")
@@ -372,7 +372,7 @@ class TestWarnings(SoupTest):
         with warnings.catch_warnings(record=True) as warning_list:
             # note - this url must differ from the bytes one otherwise
             # python's warnings system swallows the second warning
-            soup = BeautifulSoup(url, "html.parser")
+            soup = CampbellsSoup(url, "html.parser")
         warning = self._assert_warning(warning_list, MarkupResemblesLocatorWarning)
         assert "looks more like a URL" in str(warning.message)
         assert url not in str(warning.message)
@@ -399,7 +399,7 @@ class TestSelectiveParsing(SoupTest):
 
 
 class TestNewTag(SoupTest):
-    """Test the BeautifulSoup.new_tag() method."""
+    """Test the CampbellsSoup.new_tag() method."""
 
     def test_new_tag(self):
         soup = self.soup("")
@@ -414,7 +414,7 @@ class TestNewTag(SoupTest):
         reason="lxml not installed, cannot parse XML document",
     )
     def test_xml_tag_inherits_self_closing_rules_from_builder(self):
-        xml_soup = BeautifulSoup("", "xml")
+        xml_soup = CampbellsSoup("", "xml")
         xml_br = xml_soup.new_tag("br")
         xml_p = xml_soup.new_tag("p")
 
@@ -424,7 +424,7 @@ class TestNewTag(SoupTest):
         assert b"<p/>" == xml_p.encode()
 
     def test_tag_inherits_self_closing_rules_from_builder(self):
-        html_soup = BeautifulSoup("", "html.parser")
+        html_soup = CampbellsSoup("", "html.parser")
         html_br = html_soup.new_tag("br")
         html_p = html_soup.new_tag("p")
 
@@ -435,7 +435,7 @@ class TestNewTag(SoupTest):
 
 
 class TestNewString(SoupTest):
-    """Test the BeautifulSoup.new_string() method."""
+    """Test the CampbellsSoup.new_string() method."""
 
     def test_new_string_creates_navigablestring(self):
         soup = self.soup("")
@@ -451,7 +451,7 @@ class TestNewString(SoupTest):
 
 
 class TestPickle(SoupTest):
-    # Test our ability to pickle the BeautifulSoup object itself.
+    # Test our ability to pickle the CampbellsSoup object itself.
 
     def test_normal_pickle(self):
         soup = self.soup("<a>some markup</a>")

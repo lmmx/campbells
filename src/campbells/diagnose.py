@@ -14,7 +14,7 @@ from html.parser import HTMLParser
 from io import BytesIO
 
 import campbells
-from campbells import BeautifulSoup, __version__
+from campbells import CampbellsSoup, __version__
 from campbells.builder import builder_registry
 
 
@@ -62,7 +62,7 @@ def diagnose(data):
         print("Trying to parse your markup with %s" % parser)
         success = False
         try:
-            soup = BeautifulSoup(data, features=parser)
+            soup = CampbellsSoup(data, features=parser)
             success = True
         except Exception:
             print("%s could not parse the markup." % parser)
@@ -197,7 +197,7 @@ def benchmark_parsers(num_elements=100000):
         success = False
         try:
             a = time.time()
-            BeautifulSoup(data, parser)
+            CampbellsSoup(data, parser)
             b = time.time()
             success = True
         except Exception:
@@ -229,7 +229,7 @@ def profile(num_elements=100000, parser="lxml"):
 
     data = rdoc(num_elements)
     vars = dict(campbells=campbells, data=data, parser=parser)
-    cProfile.runctx("campbells.BeautifulSoup(data, parser)", vars, vars, filename)
+    cProfile.runctx("campbells.CampbellsSoup(data, parser)", vars, vars, filename)
 
     stats = pstats.Stats(filename)
     # stats.strip_dirs()

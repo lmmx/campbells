@@ -139,18 +139,18 @@ class TreeBuilderForHtml5lib(treebuilder_base.TreeBuilder):
         if soup:
             self.soup = soup
         else:
-            from campbells import BeautifulSoup
+            from campbells import CampbellsSoup
 
             # TODO: Why is the parser 'html.parser' here? To avoid an
             # infinite loop?
-            self.soup = BeautifulSoup(
+            self.soup = CampbellsSoup(
                 "",
                 "html.parser",
                 store_line_numbers=store_line_numbers,
                 **kwargs,
             )
         # TODO: What are **kwargs exactly? Should they be passed in
-        # here in addition to/instead of being passed to the BeautifulSoup
+        # here in addition to/instead of being passed to the CampbellsSoup
         # constructor?
         super().__init__(namespaceHTMLElements)
 
@@ -188,11 +188,11 @@ class TreeBuilderForHtml5lib(treebuilder_base.TreeBuilder):
         return TextNode(Comment(data), self.soup)
 
     def fragmentClass(self):
-        from campbells import BeautifulSoup
+        from campbells import CampbellsSoup
 
         # TODO: Why is the parser 'html.parser' here? To avoid an
         # infinite loop?
-        self.soup = BeautifulSoup("", "html.parser")
+        self.soup = CampbellsSoup("", "html.parser")
         self.soup.name = "[document_fragment]"
         return Element(self.soup, self.soup, None)
 
@@ -207,7 +207,7 @@ class TreeBuilderForHtml5lib(treebuilder_base.TreeBuilder):
         return treebuilder_base.TreeBuilder.getFragment(self).element
 
     def testSerializer(self, element):
-        from campbells import BeautifulSoup
+        from campbells import CampbellsSoup
 
         rv = []
         doctype_re = re.compile(
@@ -215,7 +215,7 @@ class TreeBuilderForHtml5lib(treebuilder_base.TreeBuilder):
         )
 
         def serializeElement(element, indent=0):
-            if isinstance(element, BeautifulSoup):
+            if isinstance(element, CampbellsSoup):
                 pass
             if isinstance(element, Doctype):
                 m = doctype_re.match(element)

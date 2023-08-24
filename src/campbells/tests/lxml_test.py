@@ -11,7 +11,7 @@ from . import LXML_PRESENT, LXML_VERSION
 if LXML_PRESENT:
     from campbells.builder import LXMLTreeBuilder, LXMLTreeBuilderForXML
 
-from campbells import BeautifulSoup, BeautifulStoneSoup
+from campbells import BeautifulStoneSoup, CampbellsSoup
 from campbells.element import Comment, Doctype, SoupStrainer
 
 from . import (
@@ -106,7 +106,7 @@ class TestLXMLXMLTreeBuilder(SoupTest, XMLTreeBuilderSmokeTest):
             "</root>",
         )
 
-        # The BeautifulSoup object includes every namespace prefix
+        # The CampbellsSoup object includes every namespace prefix
         # defined in the entire document. This is the default set of
         # namespaces used by soupsieve.
         #
@@ -166,7 +166,7 @@ class TestLXMLXMLTreeBuilder(SoupTest, XMLTreeBuilderSmokeTest):
         assert soup.select_one("prefix|tag2").name == "tag2"
 
         # If a prefix is declared more than once, only the first usage
-        # is registered with the BeautifulSoup object.
+        # is registered with the CampbellsSoup object.
         assert soup.select_one("prefix|tag3") is None
 
         # But you can always explicitly specify a namespace dictionary.
@@ -175,7 +175,7 @@ class TestLXMLXMLTreeBuilder(SoupTest, XMLTreeBuilderSmokeTest):
             == "tag3"
         )
 
-        # And a Tag (as opposed to the BeautifulSoup object) will
+        # And a Tag (as opposed to the CampbellsSoup object) will
         # have a set of default namespaces scoped to that Tag.
         assert soup.subtag.select_one("prefix|tag3").name == "tag3"
 

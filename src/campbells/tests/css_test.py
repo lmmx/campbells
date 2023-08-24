@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from campbells import CSS, BeautifulSoup, ResultSet
+from campbells import CSS, CampbellsSoup, ResultSet
 
 from . import SOUP_SIEVE_PRESENT, SoupTest
 
@@ -70,7 +70,7 @@ class TestCSSSelectors(SoupTest):
 """
 
     def setup_method(self):
-        self.soup = BeautifulSoup(self.HTML, "html.parser")
+        self.soup = CampbellsSoup(self.HTML, "html.parser")
 
     def assert_selects(self, selector, expected_ids, **kwargs):
         results = self.soup.select(selector, **kwargs)
@@ -345,7 +345,7 @@ class TestCSSSelectors(SoupTest):
         html = """<div style="display: wrong">nope</div>
         <div style="display: right">yes</div>
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = CampbellsSoup(html, "html.parser")
         [chosen] = soup.select('div[style="display: right"]')
         assert "yes" == chosen.string
 
@@ -469,7 +469,7 @@ class TestCSSSelectors(SoupTest):
         # When markup contains duplicate elements, a multiple select
         # will find all of them.
         markup = '<div class="c1"/><div class="c2"/><div class="c1"/>'
-        soup = BeautifulSoup(markup, "html.parser")
+        soup = CampbellsSoup(markup, "html.parser")
         selected = soup.select(".c1, .c2")
         assert 3 == len(selected)
 

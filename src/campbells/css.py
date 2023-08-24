@@ -16,7 +16,7 @@ class CSS:
     CSS selector API.
 
     Acquire this object through the .css attribute on the
-    BeautifulSoup object, or on the Tag you want to use as the
+    CampbellsSoup object, or on the Tag you want to use as the
     starting point for a CSS selector.
 
     The main advantage of doing this is that the tag to be selected
@@ -28,7 +28,7 @@ class CSS:
         """Constructor.
 
         You don't need to instantiate this class yourself; instead,
-        access the .css attribute on the BeautifulSoup object, or on
+        access the .css attribute on the CampbellsSoup object, or on
         the Tag you want to use as the starting point for your CSS
         selector.
 

@@ -5,7 +5,7 @@ import sys
 
 import pytest
 
-from campbells import BeautifulSoup
+from campbells import CampbellsSoup
 from campbells.element import Comment, ResultSet, SoupStrainer
 
 from . import SoupTest
@@ -151,7 +151,7 @@ class TestFormatters(SoupTest):
    console.log("< < hey > > ");
   </script>
 """
-        encoded = BeautifulSoup(doc, "html.parser").encode()
+        encoded = CampbellsSoup(doc, "html.parser").encode()
         assert b"< < hey > >" in encoded
 
     def test_formatter_skips_style_tag_for_html_documents(self):
@@ -160,7 +160,7 @@ class TestFormatters(SoupTest):
    console.log("< < hey > > ");
   </style>
 """
-        encoded = BeautifulSoup(doc, "html.parser").encode()
+        encoded = CampbellsSoup(doc, "html.parser").encode()
         assert b"< < hey > >" in encoded
 
     def test_prettify_leaves_preformatted_text_alone(self):
@@ -199,7 +199,7 @@ class TestFormatters(SoupTest):
         assert expect == soup.div.prettify()
 
     def test_prettify_accepts_formatter_function(self):
-        soup = BeautifulSoup("<html><body>foo</body></html>", "html.parser")
+        soup = CampbellsSoup("<html><body>foo</body></html>", "html.parser")
         pretty = soup.prettify(formatter=lambda x: x.upper())
         assert "FOO" in pretty
 
@@ -283,7 +283,7 @@ class TestPersistence(SoupTest):
         # to the original.
         dumped = pickle.dumps(self.tree, 2)
         loaded = pickle.loads(dumped)
-        assert loaded.__class__ == BeautifulSoup
+        assert loaded.__class__ == CampbellsSoup
         assert loaded.decode() == self.tree.decode()
 
     def test_deepcopy_identity(self):
@@ -304,7 +304,7 @@ class TestPersistence(SoupTest):
         copied = copy.deepcopy(soup)
 
     def test_copy_preserves_encoding(self):
-        soup = BeautifulSoup(b"<p>&nbsp;</p>", "html.parser")
+        soup = CampbellsSoup(b"<p>&nbsp;</p>", "html.parser")
         encoding = soup.original_encoding
         copy = soup.__copy__()
         assert "<p> </p>" == str(copy)

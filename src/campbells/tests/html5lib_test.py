@@ -4,7 +4,7 @@ import warnings
 
 import pytest
 
-from campbells import BeautifulSoup
+from campbells import CampbellsSoup
 from campbells.element import SoupStrainer
 
 from . import HTML5LIB_PRESENT, HTML5TreeBuilderSmokeTest, SoupTest
@@ -28,7 +28,7 @@ class TestHTML5LibBuilder(SoupTest, HTML5TreeBuilderSmokeTest):
         strainer = SoupStrainer("b")
         markup = "<p>A <b>bold</b> statement.</p>"
         with warnings.catch_warnings(record=True) as w:
-            soup = BeautifulSoup(markup, "html5lib", parse_only=strainer)
+            soup = CampbellsSoup(markup, "html5lib", parse_only=strainer)
         assert soup.decode() == self.document_for(markup)
 
         [warning] = w

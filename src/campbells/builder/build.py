@@ -43,7 +43,7 @@ class XMLParsedAsHTMLWarning(UserWarning):
     XML that is not XHTML.
     """
 
-    MESSAGE = """It looks like you're parsing an XML document using an HTML parser. If this really is an HTML document (maybe it's XHTML?), you can ignore or filter this warning. If it's XML, you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the lxml package installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor."""
+    MESSAGE = """It looks like you're parsing an XML document using an HTML parser. If this really is an HTML document (maybe it's XHTML?), you can ignore or filter this warning. If it's XML, you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the lxml package installed, and pass the keyword argument `features="xml"` into the CampbellsSoup constructor."""
 
 
 class TreeBuilderRegistry:
@@ -192,10 +192,10 @@ class TreeBuilder:
         self.string_containers = string_containers
 
     def initialize_soup(self, soup):
-        """The BeautifulSoup object has been initialized and is now
+        """The CampbellsSoup object has been initialized and is now
         being associated with the TreeBuilder.
 
-        :param soup: A BeautifulSoup object.
+        :param soup: A CampbellsSoup object.
         """
         self.soup = soup
 
@@ -231,7 +231,7 @@ class TreeBuilder:
 
     def feed(self, markup):
         """Run some incoming markup through some parsing process,
-        populating the `BeautifulSoup` object in self.soup.
+        populating the `CampbellsSoup` object in self.soup.
 
         This method is not implemented in TreeBuilder; it must be
         implemented in subclasses.

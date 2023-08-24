@@ -3,7 +3,7 @@ import logging
 import pytest
 
 import campbells
-from campbells import BeautifulSoup
+from campbells import CampbellsSoup
 from campbells.dammit import EncodingDetector, EntitySubstitution, UnicodeDammit
 
 
@@ -127,7 +127,7 @@ class TestEncodingDetector:
             assert True == dammit.contains_replacement_characters
             assert "\ufffd" in dammit.unicode_markup
 
-            soup = BeautifulSoup(doc, "html.parser")
+            soup = CampbellsSoup(doc, "html.parser")
             assert soup.contains_replacement_characters
         finally:
             logging.disable(logging.NOTSET)

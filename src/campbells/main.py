@@ -15,29 +15,29 @@ from .element import (
 __all__ = [
     "GuessedAtParserWarning",
     "MarkupResemblesLocatorWarning",
-    "BeautifulSoup",
+    "CampbellsSoup",
     "StopParsing",
     "FeatureNotFound",
 ]
 
 
 class GuessedAtParserWarning(UserWarning):
-    """The warning issued when BeautifulSoup has to guess what parser to
+    """The warning issued when CampbellsSoup has to guess what parser to
     use -- probably because no parser was specified in the constructor.
     """
 
 
 class MarkupResemblesLocatorWarning(UserWarning):
-    """The warning issued when BeautifulSoup is given 'markup' that
+    """The warning issued when CampbellsSoup is given 'markup' that
     actually looks like a resource locator -- a URL or a path to a file
     on disk.
     """
 
 
-class BeautifulSoup(Tag):
+class CampbellsSoup(Tag):
     """A data structure representing a parsed HTML or XML document.
 
-    Most of the methods you'll call on a BeautifulSoup object are inherited from
+    Most of the methods you'll call on a CampbellsSoup object are inherited from
     PageElement or Tag.
 
     Internally, this class defines the basic interface called by the
@@ -46,7 +46,7 @@ class BeautifulSoup(Tag):
     parsers. To write a new tree builder, you'll need to understand
     these methods as a whole.
 
-    These methods will be called by the BeautifulSoup constructor:
+    These methods will be called by the CampbellsSoup constructor:
       * reset()
       * feed(markup)
 
@@ -65,8 +65,8 @@ class BeautifulSoup(Tag):
     handle_endtag.
     """
 
-    # Since BeautifulSoup subclasses Tag, it's possible to treat it as
-    # a Tag with a .name. This name makes it clear the BeautifulSoup
+    # Since CampbellsSoup subclasses Tag, it's possible to treat it as
+    # a Tag with a .name. This name makes it clear the CampbellsSoup
     # object isn't a real markup tag.
     ROOT_TAG_NAME = "[document]"
 
@@ -78,7 +78,7 @@ class BeautifulSoup(Tag):
     # endData() to detect data chunks that seem 'empty'.
     ASCII_SPACES = "\x20\x0a\x09\x0c\x0d"
 
-    NO_PARSER_SPECIFIED_WARNING = "No parser was explicitly specified, so I'm using the best available %(markup_type)s parser for this system (\"%(parser)s\"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.\n\nThe code that caused this warning is on line %(line_number)s of the file %(filename)s. To get rid of this warning, pass the additional argument 'features=\"%(parser)s\"' to the BeautifulSoup constructor.\n"
+    NO_PARSER_SPECIFIED_WARNING = "No parser was explicitly specified, so I'm using the best available %(markup_type)s parser for this system (\"%(parser)s\"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.\n\nThe code that caused this warning is on line %(line_number)s of the file %(filename)s. To get rid of this warning, pass the additional argument 'features=\"%(parser)s\"' to the CampbellsSoup constructor.\n"
 
     def __init__(
         self,
@@ -123,7 +123,7 @@ class BeautifulSoup(Tag):
          the document's encoding but you know Beautiful Soup's guess is
          wrong.
 
-        :param element_classes: A dictionary mapping BeautifulSoup
+        :param element_classes: A dictionary mapping CampbellsSoup
          classes like Tag and NavigableString, to other classes you'd
          like to be instantiated instead as the parse tree is
          built. This is useful for subclassing Tag or NavigableString
@@ -136,7 +136,7 @@ class BeautifulSoup(Tag):
          ignored.
 
          Apart from this, any keyword arguments passed into the
-         BeautifulSoup constructor are propagated to the TreeBuilder
+         CampbellsSoup constructor are propagated to the TreeBuilder
          constructor. This makes it possible to configure a
          TreeBuilder by passing in arguments, not just by saying which
          one to use.
@@ -145,7 +145,7 @@ class BeautifulSoup(Tag):
             del kwargs["convertEntities"]
             warnings.warn(
                 "BS4 does not respect the convertEntities argument to the "
-                "BeautifulSoup constructor. Entities are always converted "
+                "CampbellsSoup constructor. Entities are always converted "
                 "to Unicode characters.",
             )
 
@@ -153,7 +153,7 @@ class BeautifulSoup(Tag):
             del kwargs["markupMassage"]
             warnings.warn(
                 "BS4 does not respect the markupMassage argument to the "
-                "BeautifulSoup constructor. The tree builder is responsible "
+                "CampbellsSoup constructor. The tree builder is responsible "
                 "for any necessary markup massage.",
             )
 
@@ -161,7 +161,7 @@ class BeautifulSoup(Tag):
             del kwargs["smartQuotesTo"]
             warnings.warn(
                 "BS4 does not respect the smartQuotesTo argument to the "
-                "BeautifulSoup constructor. Smart quotes are always converted "
+                "CampbellsSoup constructor. Smart quotes are always converted "
                 "to Unicode characters.",
             )
 
@@ -169,7 +169,7 @@ class BeautifulSoup(Tag):
             del kwargs["selfClosingTags"]
             warnings.warn(
                 "BS4 does not respect the selfClosingTags argument to the "
-                "BeautifulSoup constructor. The tree builder is responsible "
+                "CampbellsSoup constructor. The tree builder is responsible "
                 "for understanding self-closing tags.",
             )
 
@@ -177,7 +177,7 @@ class BeautifulSoup(Tag):
             del kwargs["isHTML"]
             warnings.warn(
                 "BS4 does not respect the isHTML argument to the "
-                "BeautifulSoup constructor. Suggest you use "
+                "CampbellsSoup constructor. Suggest you use "
                 "features='lxml' for HTML and features='lxml-xml' for "
                 "XML.",
             )
@@ -185,7 +185,7 @@ class BeautifulSoup(Tag):
         def deprecated_argument(old_name, new_name):
             if old_name in kwargs:
                 warnings.warn(
-                    'The "%s" argument to the BeautifulSoup constructor '
+                    'The "%s" argument to the CampbellsSoup constructor '
                     'has been renamed to "%s."' % (old_name, new_name),
                     DeprecationWarning,
                     stacklevel=3,
@@ -287,7 +287,7 @@ class BeautifulSoup(Tag):
         else:
             if kwargs:
                 warnings.warn(
-                    "Keyword arguments to the BeautifulSoup constructor will be ignored. These would normally be passed into the TreeBuilder constructor, but a TreeBuilder instance was passed in as `builder`.",
+                    "Keyword arguments to the CampbellsSoup constructor will be ignored. These would normally be passed into the TreeBuilder constructor, but a TreeBuilder instance was passed in as `builder`.",
                 )
 
         self.builder = builder
@@ -343,7 +343,7 @@ class BeautifulSoup(Tag):
         self.builder.soup = None
 
     def _clone(self):
-        """Create a new BeautifulSoup object with the same TreeBuilder,
+        """Create a new CampbellsSoup object with the same TreeBuilder,
         but not associated with any markup.
 
         This is the first step of the deepcopy process.
@@ -499,7 +499,7 @@ class BeautifulSoup(Tag):
         sourcepos=None,
         **kwattrs,
     ):
-        """Create a new Tag associated with this BeautifulSoup object.
+        """Create a new Tag associated with this CampbellsSoup object.
 
         :param name: The name of the new Tag.
         :param namespace: The URI of the new Tag's XML namespace, if any.
@@ -542,25 +542,25 @@ class BeautifulSoup(Tag):
         return container
 
     def new_string(self, s, subclass=None):
-        """Create a new NavigableString associated with this BeautifulSoup
+        """Create a new NavigableString associated with this CampbellsSoup
         object.
         """
         container = self.string_container(subclass)
         return container(s)
 
     def insert_before(self, *args):
-        """This method is part of the PageElement API, but `BeautifulSoup` doesn't implement
+        """This method is part of the PageElement API, but `CampbellsSoup` doesn't implement
         it because there is nothing before or after it in the parse tree.
         """
         raise NotImplementedError(
-            "BeautifulSoup objects don't support insert_before().",
+            "CampbellsSoup objects don't support insert_before().",
         )
 
     def insert_after(self, *args):
-        """This method is part of the PageElement API, but `BeautifulSoup` doesn't implement
+        """This method is part of the PageElement API, but `CampbellsSoup` doesn't implement
         it because there is nothing before or after it in the parse tree.
         """
-        raise NotImplementedError("BeautifulSoup objects don't support insert_after().")
+        raise NotImplementedError("CampbellsSoup objects don't support insert_after().")
 
     def popTag(self):
         """Internal method called by _popToTag when a tag is closed."""
@@ -715,7 +715,7 @@ class BeautifulSoup(Tag):
         """
         # print("Popping to %s" % name)
         if name == self.ROOT_TAG_NAME:
-            # The BeautifulSoup object itself can never be popped.
+            # The CampbellsSoup object itself can never be popped.
             return
 
         most_recently_popped = None
@@ -850,12 +850,12 @@ class StopParsing(Exception):
 
 
 class FeatureNotFound(ValueError):
-    """Exception raised by the BeautifulSoup constructor if no parser with the
+    """Exception raised by the CampbellsSoup constructor if no parser with the
     requested features is found.
     """
 
 
 # If this file is run as a script, act as an HTML pretty-printer.
 if __name__ == "__main__":
-    soup = BeautifulSoup(sys.stdin)
+    soup = CampbellsSoup(sys.stdin)
     print(soup.prettify())

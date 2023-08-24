@@ -5,7 +5,7 @@ from .build import TreeBuilder, TreeBuilderRegistry
 
 __all__ = ["builder_registry", "register_treebuilders_from", "HTMLParserTreeBuilder"]
 
-# The BeautifulSoup class will take feature lists from developers and use them
+# The CampbellsSoup class will take feature lists from developers and use them
 # to look up builders in this registry.
 builder_registry = TreeBuilderRegistry()
 

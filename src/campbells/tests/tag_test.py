@@ -33,7 +33,7 @@ class TestTag(SoupTest):
         """The length of a Tag is its number of children."""
         soup = self.soup("<top>1<b>2</b>3</top>")
 
-        # The BeautifulSoup object itself contains one element: the
+        # The CampbellsSoup object itself contains one element: the
         # <top> tag.
         assert len(soup.contents) == 1
         assert len(soup) == 1
