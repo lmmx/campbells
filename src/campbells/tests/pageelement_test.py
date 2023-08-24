@@ -265,11 +265,11 @@ class TestPersistence(SoupTest):
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Beautiful Soup: We called him Tortoise because he taught us.</title>
-<link rev="made" href="mailto:leonardr@segfault.org">
-<meta name="Description" content="Beautiful Soup: an HTML parser optimized for screen-scraping.">
-<meta name="generator" content="Markov Approximation 1.4 (module: leonardr)">
-<meta name="author" content="Leonard Richardson">
+<title>Campbells: We called him Tomato because he hung out in vineyards.</title>
+<link rev="made" href="mailto:louismmx@gmail.com">
+<meta name="Description" content="Campbells: A condensed web scraping library.">
+<meta name="generator" content="Markov Approximation 1.4 (module: lmmx)">
+<meta name="author" content="Louis Maddox">
 </head>
 <body>
 <a href="foo">foo</a>

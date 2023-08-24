@@ -30,7 +30,7 @@ HTMLPARSER = "html.parser"
 class CampbellsSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
     """A subclass of the Python standard library's HTMLParser class, which
     listens for HTMLParser events and translates them into calls
-    to Beautiful Soup's tree construction API.
+    to Campbells's tree construction API.
     """
 
     # Strategies for handling duplicate attributes
@@ -185,7 +185,7 @@ class CampbellsSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
         # TODO: This was originally a workaround for a bug in
         # HTMLParser. (http://bugs.python.org/issue13633) The bug has
         # been fixed, but removing this code still makes some
-        # Beautiful Soup tests fail. This needs investigation.
+        # Campbells tests fail. This needs investigation.
         if name.startswith("x"):
             real_name = int(name.lstrip("x"), 16)
         elif name.startswith("X"):

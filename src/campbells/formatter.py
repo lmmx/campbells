@@ -143,7 +143,7 @@ class Formatter(EntitySubstitution):
 
         By default, attributes are sorted alphabetically. This makes
         behavior consistent between Python 2 and Python 3, and preserves
-        backwards compatibility with older versions of Beautiful Soup.
+        backwards compatibility with older versions of Campbells.
 
         If `empty_boolean_attributes` is True, then attributes whose
         values are set to the empty string will be treated as boolean

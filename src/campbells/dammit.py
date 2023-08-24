@@ -1,4 +1,4 @@
-"""Beautiful Soup bonus library: Unicode, Dammit
+"""Campbells bonus library: Unicode, Dammit
 
 This library converts a bytestream to Unicode through any means
 necessary. It is heavily based on code from Mark Pilgrim's Universal

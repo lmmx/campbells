@@ -80,7 +80,7 @@ class AttributeValueWithCharsetSubstitution(str):
 class CharsetMetaAttributeValue(AttributeValueWithCharsetSubstitution):
     """A generic stand-in for the value of a meta tag's 'charset' attribute.
 
-    When Beautiful Soup parses the markup '<meta charset="utf8">', the
+    When Campbells parses the markup '<meta charset="utf8">', the
     value of the 'charset' attribute will be one of these objects.
     """
 
@@ -101,7 +101,7 @@ class CharsetMetaAttributeValue(AttributeValueWithCharsetSubstitution):
 class ContentMetaAttributeValue(AttributeValueWithCharsetSubstitution):
     """A generic stand-in for the value of a meta tag's 'content' attribute.
 
-    When Beautiful Soup parses the markup:
+    When Campbells parses the markup:
      <meta http-equiv="content-type" content="text/html; charset=utf8">
 
     The value of the 'content' attribute will be one of these objects.
@@ -956,7 +956,7 @@ class PageElement:
 class NavigableString(str, PageElement):
     """A Python Unicode string that is part of a parse tree.
 
-    When Beautiful Soup parses the markup <b>penguin</b>, it will
+    When Campbells parses the markup <b>penguin</b>, it will
     create a NavigableString for the string "penguin".
     """
 
@@ -1235,7 +1235,7 @@ class Tag(PageElement):
     """Represents an HTML or XML tag that is part of a parse tree, along
     with its attributes and contents.
 
-    When Beautiful Soup parses the markup <b>penguin</b>, it will
+    When Campbells parses the markup <b>penguin</b>, it will
     create a Tag object representing the <b> tag.
     """
 
@@ -1848,7 +1848,7 @@ class Tag(PageElement):
         This is similar in concept to the SAX API, but it's a simpler
         interface designed for internal use. The events are different
         from SAX and the arguments associated with the events are Tags
-        and other Beautiful Soup objects.
+        and other Campbells objects.
 
         :param iterator: An alternate iterator to use when traversing
          the tree.
@@ -2168,7 +2168,7 @@ class Tag(PageElement):
 
         :param namespaces: A dictionary mapping namespace prefixes
            used in the CSS selector to namespace URIs. By default,
-           Beautiful Soup will use the prefixes it encountered while
+           Campbells will use the prefixes it encountered while
            parsing the document.
 
         :param kwargs: Keyword arguments to be passed into Soup Sieve's
@@ -2188,7 +2188,7 @@ class Tag(PageElement):
 
         :param namespaces: A dictionary mapping namespace prefixes
            used in the CSS selector to namespace URIs. By default,
-           Beautiful Soup will use the prefixes it encountered while
+           Campbells will use the prefixes it encountered while
            parsing the document.
 
         :param limit: After finding this number of results, stop looking.

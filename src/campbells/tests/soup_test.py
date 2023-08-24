@@ -1,4 +1,4 @@
-"""Tests of Beautiful Soup as a whole."""
+"""Tests of Campbells as a whole."""
 
 import logging
 import os
@@ -470,7 +470,7 @@ class TestPickle(SoupTest):
 
 
 class TestEncodingConversion(SoupTest):
-    # Test Beautiful Soup's ability to decode and encode from various
+    # Test Campbells's ability to decode and encode from various
     # encodings.
 
     def setup_method(self):

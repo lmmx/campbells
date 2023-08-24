@@ -112,7 +112,7 @@ class TreeBuilderRegistry:
 
 
 class TreeBuilder:
-    """Turn a textual document into a Beautiful Soup object tree."""
+    """Turn a textual document into a Campbells object tree."""
 
     NAME = "[Unknown tree builder]"
     ALTERNATE_NAMES = []
@@ -340,7 +340,7 @@ class TreeBuilder:
 
 
 class SAXTreeBuilder(TreeBuilder):
-    """A Beautiful Soup treebuilder that listens for SAX events.
+    """A Campbells treebuilder that listens for SAX events.
 
     This is not currently used for anything, but it demonstrates
     how a simple TreeBuilder would work.
@@ -518,7 +518,7 @@ class HTMLTreeBuilder(TreeBuilder):
         """Replace the declared encoding in a <meta> tag with a placeholder,
         to be substituted when the tag is output to a string.
 
-        An HTML document may come in to Beautiful Soup as one
+        An HTML document may come in to Campbells as one
         encoding, but exit in a different encoding, and the <meta> tag
         needs to be changed to reflect this.
 

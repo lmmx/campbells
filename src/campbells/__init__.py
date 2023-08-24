@@ -4,8 +4,8 @@ https://www.github.com/lmmx/campbells
 
 Campbells is adapted from Beautiful Soup under the MIT license.
 
-Beautiful Soup uses a pluggable XML or HTML parser to parse a
-(possibly invalid) document into a tree representation. Beautiful Soup
+Campbells uses a pluggable XML or HTML parser to parse a
+(possibly invalid) document into a tree representation. Campbells
 provides methods and Pythonic idioms that make it easy to navigate,
 search, and modify the parse tree.
 

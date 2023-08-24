@@ -1,10 +1,10 @@
-"""Tests for Beautiful Soup's tree traversal methods.
+"""Tests for Campbells's tree traversal methods.
 
 The tree traversal methods are the main advantage of using Beautiful
 Soup over just using a parser.
 
-Different parsers will build different Beautiful Soup trees given the
-same markup, but all Beautiful Soup trees can be traversed with the
+Different parsers will build different Campbells trees given the
+same markup, but all Campbells trees can be traversed with the
 methods tested here.
 """
 
@@ -856,7 +856,7 @@ class TestTreeModification(SoupTest):
 
     def test_consecutive_text_nodes(self):
         # A builder should never create two consecutive text nodes,
-        # but if you insert one next to another, Beautiful Soup will
+        # but if you insert one next to another, Campbells will
         # handle it correctly.
         soup = self.soup("<a><b>Argh!</b><c></c></a>")
         soup.b.insert(1, "Hooray!")

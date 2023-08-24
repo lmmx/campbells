@@ -23,7 +23,7 @@ class TestHTMLParserTreeBuilder(SoupTest, HTMLTreeBuilderSmokeTest):
         # Python's html.parser will occasionally reject markup,
         # especially when there is a problem with the initial DOCTYPE
         # declaration. Different versions of Python sound the alarm in
-        # different ways, but Beautiful Soup consistently raises
+        # different ways, but Campbells consistently raises
         # errors as ParserRejectedMarkup exceptions.
         bad_markup = [
             # https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=28873

@@ -101,7 +101,7 @@ class CampbellsSoup(Tag):
          "lxml-xml", "html.parser", or "html5lib") or it may be the
          type of markup to be used ("html", "html5", "xml"). It's
          recommended that you name a specific parser, so that
-         Beautiful Soup gives you the same results across platforms
+         Campbells gives you the same results across platforms
          and virtual environments.
 
         :param builder: A TreeBuilder subclass to instantiate (or
@@ -115,12 +115,12 @@ class CampbellsSoup(Tag):
          large to fit into memory.
 
         :param from_encoding: A string indicating the encoding of the
-         document to be parsed. Pass this in if Beautiful Soup is
+         document to be parsed. Pass this in if Campbells is
          guessing wrongly about the document's encoding.
 
         :param exclude_encodings: A list of strings indicating
          encodings known to be wrong. Pass this in if you don't know
-         the document's encoding but you know Beautiful Soup's guess is
+         the document's encoding but you know Campbells's guess is
          wrong.
 
         :param element_classes: A dictionary mapping CampbellsSoup
@@ -303,8 +303,8 @@ class CampbellsSoup(Tag):
             or (isinstance(markup, str) and "<" not in markup)
         ):
             # Issue warnings for a couple beginner problems
-            # involving passing non-markup to Beautiful Soup.
-            # Beautiful Soup will still parse the input as markup,
+            # involving passing non-markup to Campbells.
+            # Campbells will still parse the input as markup,
             # since that is sometimes the intended behavior.
             if not self._markup_is_url(markup):
                 self._markup_resembles_filename(markup)
@@ -421,7 +421,7 @@ class CampbellsSoup(Tag):
                 warnings.warn(
                     "The input looks more like a URL than markup. You may want to use"
                     " an HTTP client like requests to get the document behind"
-                    " the URL, and feed that document to Beautiful Soup.",
+                    " the URL, and feed that document to Campbells.",
                     MarkupResemblesLocatorWarning,
                     stacklevel=3,
                 )
@@ -453,7 +453,7 @@ class CampbellsSoup(Tag):
             warnings.warn(
                 "The input looks more like a filename than markup. You may"
                 " want to open this file and pass the filehandle into"
-                " Beautiful Soup.",
+                " Campbells.",
                 MarkupResemblesLocatorWarning,
                 stacklevel=3,
             )

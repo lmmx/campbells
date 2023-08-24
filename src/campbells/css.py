@@ -86,7 +86,7 @@ class CSS:
 
         :param namespaces: A dictionary mapping namespace prefixes
            used in the CSS selector to namespace URIs. By default,
-           Beautiful Soup will use the prefixes it encountered while
+           Campbells will use the prefixes it encountered while
            parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
@@ -112,7 +112,7 @@ class CSS:
 
         :param namespaces: A dictionary mapping namespace prefixes
            used in the CSS selector to namespace URIs. By default,
-           Beautiful Soup will use the prefixes it encountered while
+           Campbells will use the prefixes it encountered while
            parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
@@ -144,7 +144,7 @@ class CSS:
 
         :param namespaces: A dictionary mapping namespace prefixes
             used in the CSS selector to namespace URIs. By default,
-            Beautiful Soup will pass in the prefixes it encountered while
+            Campbells will pass in the prefixes it encountered while
             parsing the document.
 
         :param limit: After finding this number of results, stop looking.
@@ -185,7 +185,7 @@ class CSS:
 
         :param namespaces: A dictionary mapping namespace prefixes
             used in the CSS selector to namespace URIs. By default,
-            Beautiful Soup will pass in the prefixes it encountered while
+            Campbells will pass in the prefixes it encountered while
             parsing the document.
 
         :param limit: After finding this number of results, stop looking.
@@ -219,7 +219,7 @@ class CSS:
 
         :param namespaces: A dictionary mapping namespace prefixes
             used in the CSS selector to namespace URIs. By default,
-            Beautiful Soup will pass in the prefixes it encountered while
+            Campbells will pass in the prefixes it encountered while
             parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
@@ -251,7 +251,7 @@ class CSS:
 
         :param namespaces: A dictionary mapping namespace prefixes
             used in the CSS selector to namespace URIs. By default,
-            Beautiful Soup will pass in the prefixes it encountered while
+            Campbells will pass in the prefixes it encountered while
             parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
@@ -281,7 +281,7 @@ class CSS:
 
         :param namespaces: A dictionary mapping namespace prefixes
             used in the CSS selector to namespace URIs. By default,
-            Beautiful Soup will pass in the prefixes it encountered while
+            Campbells will pass in the prefixes it encountered while
             parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's

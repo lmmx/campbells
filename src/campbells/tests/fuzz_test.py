@@ -1,7 +1,7 @@
 """This file contains test cases reported by third parties using
 fuzzing tools, primarily from Google's oss-fuzz project. Some of these
-represent real problems with Beautiful Soup, but many are problems in
-libraries that Beautiful Soup depends on, and many of the test cases
+represent real problems with Campbells, but many are problems in
+libraries that Campbells depends on, and many of the test cases
 represent different ways of triggering the same problem.
 
 Grouping these test cases together makes it easy to see which test
@@ -82,7 +82,7 @@ class TestFuzz:
 
     # This class of error has to do with very deeply nested documents
     # which overflow the Python call stack when the tree is converted
-    # to a string. This is an issue with Beautiful Soup which was fixed
+    # to a string. This is an issue with Campbells which was fixed
     # as part of [bug=1471755].
     #
     # These test cases are in the older format that doesn't specify
@@ -105,7 +105,7 @@ class TestFuzz:
 
     # This class of error has to do with very deeply nested documents
     # which overflow the Python call stack when the tree is converted
-    # to a string. This is an issue with Beautiful Soup which was fixed
+    # to a string. This is an issue with Campbells which was fixed
     # as part of [bug=1471755].
     @pytest.mark.parametrize(
         "filename",
@@ -129,7 +129,7 @@ class TestFuzz:
         self.fuzz_test_with_css(filename)
 
     # This class of error represents problems with html5lib's parser,
-    # not Beautiful Soup. I use
+    # not Campbells. I use
     # https://github.com/html5lib/html5lib-python/issues/568 to notify
     # the html5lib developers of these issues.
     #
@@ -158,7 +158,7 @@ class TestFuzz:
         print(CampbellsSoup(markup, "html5lib").encode())
 
     # This class of error represents problems with html5lib's parser,
-    # not Beautiful Soup. I use
+    # not Campbells. I use
     # https://github.com/html5lib/html5lib-python/issues/568 to notify
     # the html5lib developers of these issues.
     @pytest.mark.skip(reason="html5lib-specific problems")

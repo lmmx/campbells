@@ -24,7 +24,7 @@ def diagnose(data):
     :param data: A string containing markup that needs to be explained.
     :return: None; diagnostics are printed to standard output.
     """
-    print("Diagnostic running on Beautiful Soup %s" % __version__)
+    print("Diagnostic running on Campbells %s" % __version__)
     print("Python version %s" % sys.version)
 
     basic_parsers = ["html.parser", "html5lib", "lxml"]
@@ -79,7 +79,7 @@ def lxml_trace(data, html=True, **kwargs):
 
     This lets you see how lxml parses a document when no Beautiful
     Soup code is running. You can use this to determine whether
-    an lxml-specific problem is in Beautiful Soup's lxml tree builders
+    an lxml-specific problem is in Campbells's lxml tree builders
     or in lxml itself.
 
     :param data: Some markup.
@@ -139,7 +139,7 @@ def htmlparser_trace(data):
     """Print out the HTMLParser events that occur during parsing.
 
     This lets you see how HTMLParser parses a document when no
-    Beautiful Soup code is running.
+    Campbells code is running.
 
     :param data: Some markup.
     """
@@ -189,7 +189,7 @@ def rdoc(num_elements=1000):
 
 def benchmark_parsers(num_elements=100000):
     """Very basic head-to-head performance benchmark."""
-    print("Comparative parser benchmark on Beautiful Soup %s" % __version__)
+    print("Comparative parser benchmark on Campbells %s" % __version__)
     data = rdoc(num_elements)
     print("Generated a large invalid HTML document (%d bytes)." % len(data))
 

@@ -99,7 +99,7 @@ class SoupTest:
         return default_builder
 
     def soup(self, markup, **kwargs):
-        """Build a Beautiful Soup object from markup."""
+        """Build a Campbells object from markup."""
         builder = kwargs.pop("builder", self.default_builder)
         return CampbellsSoup(markup, builder=builder, **kwargs)
 
@@ -111,7 +111,7 @@ class SoupTest:
         return self.default_builder(**kwargs).test_fragment_to_document(markup)
 
     def assert_soup(self, to_parse, compare_parsed_to=None):
-        """Parse some markup using Beautiful Soup and verify that
+        """Parse some markup using Campbells and verify that
         the output markup is as expected.
         """
         builder = self.default_builder
@@ -808,7 +808,7 @@ Hello, world!
 
     #
     # Generally speaking, tests below this point are more tests of
-    # Beautiful Soup than tests of the tree builders. But parsers are
+    # Campbells than tests of the tree builders. But parsers are
     # weird, so we run these tests separately for every tree builder
     # to detect any differences between them.
     #

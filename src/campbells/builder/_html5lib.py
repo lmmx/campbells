@@ -83,7 +83,7 @@ class HTML5TreeBuilder(HTMLTreeBuilder):
 
         yield (markup, None, None, False)
 
-    # These methods are defined by Beautiful Soup.
+    # These methods are defined by Campbells.
     def feed(self, markup):
         if self.soup.parse_only is not None:
             warnings.warn(
@@ -346,7 +346,7 @@ class Element(treebuilder_base.Node):
                 # Create a brand new NavigableString from this string.
                 child = self.soup.new_string(node)
 
-            # Tell Beautiful Soup to act as if it parsed this element
+            # Tell Campbells to act as if it parsed this element
             # immediately after the parent's last descendant. (Or
             # immediately after the parent, if it has no children.)
             if self.element.contents:
