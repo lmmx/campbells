@@ -2,7 +2,7 @@
 
 from html.parser import HTMLParser
 
-from campbells.builder import (
+from campbells.builder.build import (
     HTML,
     STRICT,
     DetectsXMLParsedAsHTML,

@@ -24,7 +24,8 @@ import sys
 import warnings
 from collections import Counter
 
-from .builder import HTMLParserTreeBuilder, ParserRejectedMarkup, XMLParsedAsHTMLWarning
+from .builder import HTMLParserTreeBuilder
+from .builder.build import ParserRejectedMarkup, XMLParsedAsHTMLWarning
 from .dammit import UnicodeDammit
 from .element import (
     CSS,

@@ -1,3 +1,17 @@
+import sys
+import warnings
+from collections import Counter
+
+from .builder import builder_registry
+from .builder._htmlparser import HTMLParserTreeBuilder
+from .builder.build import ParserRejectedMarkup
+from .element import (
+    DEFAULT_OUTPUT_ENCODING,
+    PYTHON_SPECIFIC_ENCODINGS,
+    NavigableString,
+    Tag,
+)
+
 __all__ = [
     "GuessedAtParserWarning",
     "MarkupResemblesLocatorWarning",
@@ -5,18 +19,6 @@ __all__ = [
     "StopParsing",
     "FeatureNotFound",
 ]
-
-import sys
-import warnings
-from collections import Counter
-
-from .builder import HTMLParserTreeBuilder, ParserRejectedMarkup, builder_registry
-from .element import (
-    DEFAULT_OUTPUT_ENCODING,
-    PYTHON_SPECIFIC_ENCODINGS,
-    NavigableString,
-    Tag,
-)
 
 
 class GuessedAtParserWarning(UserWarning):
