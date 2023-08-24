@@ -810,7 +810,7 @@ class TestTreeModification(SoupTest):
         with pytest.raises(ValueError):
             soup.a.insert(0, soup.a)
 
-    def test_insert_beautifulsoup_object_inserts_children(self):
+    def test_insert_campbellssoup_object_inserts_children(self):
         """Inserting one CampbellsSoup object into another actually inserts all
         of its children -- you'll never combine CampbellsSoup objects.
         """

@@ -50,7 +50,7 @@ class TestBuiltInRegistry:
 
         assert registry.lookup("html.parser") == HTMLParserTreeBuilder
 
-    def test_beautifulsoup_constructor_does_lookup(self):
+    def test_campbellssoup_constructor_does_lookup(self):
         with warnings.catch_warnings(record=True) as w:
             # This will create a warning about not explicitly
             # specifying a parser, but we'll ignore it.
