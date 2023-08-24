@@ -4,17 +4,17 @@ import warnings
 
 import pytest
 
-from bs4 import BeautifulSoup
-from bs4.builder import HTMLParserTreeBuilder, TreeBuilderRegistry
-from bs4.builder import builder_registry as registry
+from campbells import BeautifulSoup
+from campbells.builder import HTMLParserTreeBuilder, TreeBuilderRegistry
+from campbells.builder import builder_registry as registry
 
 from . import HTML5LIB_PRESENT, LXML_PRESENT
 
 if HTML5LIB_PRESENT:
-    from bs4.builder import HTML5TreeBuilder
+    from campbells.builder import HTML5TreeBuilder
 
 if LXML_PRESENT:
-    from bs4.builder import LXMLTreeBuilder, LXMLTreeBuilderForXML
+    from campbells.builder import LXMLTreeBuilder, LXMLTreeBuilderForXML
 
 
 # TODO: Split out the lxml and html5lib tests into their own classes

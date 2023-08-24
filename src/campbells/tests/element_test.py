@@ -4,7 +4,7 @@ The really big classes -- Tag, PageElement, and NavigableString --
 are tested in separate files.
 """
 
-from bs4.element import (
+from campbells.element import (
     CharsetMetaAttributeValue,
     ContentMetaAttributeValue,
     NamespacedAttribute,

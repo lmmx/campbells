@@ -12,7 +12,7 @@ import os
 
 import pytest
 
-from bs4 import BeautifulSoup, ParserRejectedMarkup
+from campbells import BeautifulSoup, ParserRejectedMarkup
 
 try:
     import html5lib

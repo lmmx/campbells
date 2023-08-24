@@ -9,15 +9,15 @@ import warnings
 
 import pytest
 
-from bs4 import (
+from campbells import (
     BeautifulSoup,
     BeautifulStoneSoup,
     GuessedAtParserWarning,
     MarkupResemblesLocatorWarning,
     dammit,
 )
-from bs4.builder import ParserRejectedMarkup, TreeBuilder, builder_registry
-from bs4.element import (
+from campbells.builder import ParserRejectedMarkup, TreeBuilder, builder_registry
+from campbells.element import (
     PYTHON_SPECIFIC_ENCODINGS,
     Comment,
     NavigableString,

@@ -8,7 +8,7 @@ import sys
 import warnings
 from collections import defaultdict
 
-from bs4.element import (
+from campbells.element import (
     CharsetMetaAttributeValue,
     ContentMetaAttributeValue,
     RubyParenthesisString,

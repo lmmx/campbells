@@ -75,7 +75,7 @@ class CSS:
         result (a common mistake).
         """
         # Import here to avoid circular import
-        from bs4.element import ResultSet
+        from campbells.element import ResultSet
 
         return ResultSet(None, results)
 
@@ -122,7 +122,7 @@ class CSS:
            soupsieve.select_one() method.
 
         :return: A Tag, or None if the selector has no match.
-        :rtype: bs4.element.Tag
+        :rtype: campbells.element.Tag
 
         """
         return self.api.select_one(
@@ -156,7 +156,7 @@ class CSS:
             soupsieve.select() method.
 
         :return: A ResultSet of Tag objects.
-        :rtype: bs4.element.ResultSet
+        :rtype: campbells.element.ResultSet
 
         """
         if limit is None:
@@ -229,7 +229,7 @@ class CSS:
             soupsieve.closest() method.
 
         :return: A Tag, or None if there is no match.
-        :rtype: bs4.Tag
+        :rtype: campbells.Tag
 
         """
         return self.api.closest(
@@ -291,7 +291,7 @@ class CSS:
             soupsieve.filter() method.
 
         :return: A ResultSet of Tag objects.
-        :rtype: bs4.element.ResultSet
+        :rtype: campbells.element.ResultSet
 
         """
         return self._rs(

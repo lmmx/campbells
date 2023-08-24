@@ -9,15 +9,15 @@ __all__ = [
 
 from html.parser import HTMLParser
 
-from bs4.builder import (
+from campbells.builder import (
     HTML,
     STRICT,
     DetectsXMLParsedAsHTML,
     HTMLTreeBuilder,
     ParserRejectedMarkup,
 )
-from bs4.dammit import EntitySubstitution, UnicodeDammit
-from bs4.element import CData, Comment, Declaration, Doctype, ProcessingInstruction
+from campbells.dammit import EntitySubstitution, UnicodeDammit
+from campbells.element import CData, Comment, Declaration, Doctype, ProcessingInstruction
 
 HTMLPARSER = "html.parser"
 

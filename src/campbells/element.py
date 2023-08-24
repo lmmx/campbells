@@ -8,8 +8,8 @@ except ImportError:
 import re
 import warnings
 
-from bs4.css import CSS
-from bs4.formatter import Formatter, HTMLFormatter, XMLFormatter
+from campbells.css import CSS
+from campbells.formatter import Formatter, HTMLFormatter, XMLFormatter
 
 DEFAULT_OUTPUT_ENCODING = "utf-8"
 
@@ -417,7 +417,7 @@ class PageElement:
         if isinstance(new_child, str) and not isinstance(new_child, NavigableString):
             new_child = NavigableString(new_child)
 
-        from bs4 import BeautifulSoup
+        from campbells import BeautifulSoup
 
         if isinstance(new_child, BeautifulSoup):
             # We don't want to end up with a situation where one BeautifulSoup
@@ -566,7 +566,7 @@ class PageElement:
         :param string: A filter for a NavigableString with specific text.
         :kwargs: A dictionary of filters on attribute values.
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         return self._find_one(self.find_all_next, name, attrs, string, **kwargs)
 
@@ -607,7 +607,7 @@ class PageElement:
         :param string: A filter for a NavigableString with specific text.
         :kwargs: A dictionary of filters on attribute values.
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         return self._find_one(self.find_next_siblings, name, attrs, string, **kwargs)
 
@@ -631,7 +631,7 @@ class PageElement:
         :param limit: Stop looking after finding this many results.
         :kwargs: A dictionary of filters on attribute values.
         :return: A ResultSet of PageElements.
-        :rtype: bs4.element.ResultSet
+        :rtype: campbells.element.ResultSet
         """
         _stacklevel = kwargs.pop("_stacklevel", 2)
         return self._find_all(
@@ -656,7 +656,7 @@ class PageElement:
         :param string: A filter for a NavigableString with specific text.
         :kwargs: A dictionary of filters on attribute values.
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         return self._find_one(self.find_all_previous, name, attrs, string, **kwargs)
 
@@ -673,7 +673,7 @@ class PageElement:
         :param limit: Stop looking after finding this many results.
         :kwargs: A dictionary of filters on attribute values.
         :return: A ResultSet of PageElements.
-        :rtype: bs4.element.ResultSet
+        :rtype: campbells.element.ResultSet
         """
         _stacklevel = kwargs.pop("_stacklevel", 2)
         return self._find_all(
@@ -698,7 +698,7 @@ class PageElement:
         :param string: A filter for a NavigableString with specific text.
         :kwargs: A dictionary of filters on attribute values.
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         return self._find_one(
             self.find_previous_siblings,
@@ -728,7 +728,7 @@ class PageElement:
         :param limit: Stop looking after finding this many results.
         :kwargs: A dictionary of filters on attribute values.
         :return: A ResultSet of PageElements.
-        :rtype: bs4.element.ResultSet
+        :rtype: campbells.element.ResultSet
         """
         _stacklevel = kwargs.pop("_stacklevel", 2)
         return self._find_all(
@@ -753,7 +753,7 @@ class PageElement:
         :kwargs: A dictionary of filters on attribute values.
 
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         # NOTE: We can't use _find_one because findParents takes a different
         # set of arguments.
@@ -773,7 +773,7 @@ class PageElement:
         :kwargs: A dictionary of filters on attribute values.
 
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         _stacklevel = kwargs.pop("_stacklevel", 2)
         return self._find_all(
@@ -791,7 +791,7 @@ class PageElement:
         """The PageElement, if any, that was parsed just after this one.
 
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         return self.next_element
 
@@ -800,7 +800,7 @@ class PageElement:
         """The PageElement, if any, that was parsed just before this one.
 
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         return self.previous_element
 
@@ -2071,7 +2071,7 @@ class Tag(PageElement):
         :param limit: Stop looking after finding this many results.
         :kwargs: A dictionary of filters on attribute values.
         :return: A PageElement.
-        :rtype: bs4.element.Tag | bs4.element.NavigableString
+        :rtype: campbells.element.Tag | campbells.element.NavigableString
         """
         results = self.find_all(
             name,
@@ -2108,7 +2108,7 @@ class Tag(PageElement):
         :param limit: Stop looking after finding this many results.
         :kwargs: A dictionary of filters on attribute values.
         :return: A ResultSet of PageElements.
-        :rtype: bs4.element.ResultSet
+        :rtype: campbells.element.ResultSet
         """
         generator = self.descendants
         if not recursive:
@@ -2175,7 +2175,7 @@ class Tag(PageElement):
            soupsieve.select() method.
 
         :return: A Tag.
-        :rtype: bs4.element.Tag
+        :rtype: campbells.element.Tag
         """
         return self.css.select_one(selector, namespaces, **kwargs)
 
@@ -2197,7 +2197,7 @@ class Tag(PageElement):
            soupsieve.select() method.
 
         :return: A ResultSet of Tags.
-        :rtype: bs4.element.ResultSet
+        :rtype: campbells.element.ResultSet
         """
         return self.css.select(selector, namespaces, limit, **kwargs)
 

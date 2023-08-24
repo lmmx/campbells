@@ -1,12 +1,12 @@
-"""Tests of the bs4.element.PageElement class"""
+"""Tests of the campbells.element.PageElement class"""
 import copy
 import pickle
 import sys
 
 import pytest
 
-from bs4 import BeautifulSoup
-from bs4.element import Comment, ResultSet, SoupStrainer
+from campbells import BeautifulSoup
+from campbells.element import Comment, ResultSet, SoupStrainer
 
 from . import SoupTest
 

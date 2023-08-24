@@ -15,7 +15,7 @@ from io import BytesIO, StringIO
 
 from lxml import etree
 
-from bs4.builder import (
+from campbells.builder import (
     FAST,
     HTML,
     PERMISSIVE,
@@ -25,8 +25,8 @@ from bs4.builder import (
     ParserRejectedMarkup,
     TreeBuilder,
 )
-from bs4.dammit import EncodingDetector
-from bs4.element import (
+from campbells.dammit import EncodingDetector
+from campbells.element import (
     Comment,
     Doctype,
     NamespacedAttribute,

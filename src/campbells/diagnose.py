@@ -13,9 +13,9 @@ import traceback
 from html.parser import HTMLParser
 from io import BytesIO
 
-import bs4
-from bs4 import BeautifulSoup, __version__
-from bs4.builder import builder_registry
+import campbells
+from campbells import BeautifulSoup, __version__
+from campbells.builder import builder_registry
 
 
 def diagnose(data):
@@ -228,13 +228,13 @@ def profile(num_elements=100000, parser="lxml"):
     filename = filehandle.name
 
     data = rdoc(num_elements)
-    vars = dict(bs4=bs4, data=data, parser=parser)
-    cProfile.runctx("bs4.BeautifulSoup(data, parser)", vars, vars, filename)
+    vars = dict(campbells=campbells, data=data, parser=parser)
+    cProfile.runctx("campbells.BeautifulSoup(data, parser)", vars, vars, filename)
 
     stats = pstats.Stats(filename)
     # stats.strip_dirs()
     stats.sort_stats("cumulative")
-    stats.print_stats("_html5lib|bs4", 50)
+    stats.print_stats("_html5lib|campbells", 50)
 
 
 # If this file is run as a script, standard input is diagnosed.

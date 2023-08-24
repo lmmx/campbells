@@ -13,9 +13,9 @@ import warnings
 
 import pytest
 
-from bs4 import BeautifulSoup
-from bs4.builder import HTMLParserTreeBuilder, builder_registry
-from bs4.element import (
+from campbells import BeautifulSoup
+from campbells.builder import HTMLParserTreeBuilder, builder_registry
+from campbells.element import (
     CData,
     Comment,
     Declaration,

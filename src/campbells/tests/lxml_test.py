@@ -9,10 +9,10 @@ import pytest
 from . import LXML_PRESENT, LXML_VERSION
 
 if LXML_PRESENT:
-    from bs4.builder import LXMLTreeBuilder, LXMLTreeBuilderForXML
+    from campbells.builder import LXMLTreeBuilder, LXMLTreeBuilderForXML
 
-from bs4 import BeautifulSoup, BeautifulStoneSoup
-from bs4.element import Comment, Doctype, SoupStrainer
+from campbells import BeautifulSoup, BeautifulStoneSoup
+from campbells.element import Comment, Doctype, SoupStrainer
 
 from . import (
     SOUP_SIEVE_PRESENT,

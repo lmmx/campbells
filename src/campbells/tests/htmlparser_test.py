@@ -6,12 +6,12 @@ import warnings
 
 import pytest
 
-from bs4.builder import (
+from campbells.builder import (
     HTMLParserTreeBuilder,
     ParserRejectedMarkup,
     XMLParsedAsHTMLWarning,
 )
-from bs4.builder._htmlparser import BeautifulSoupHTMLParser
+from campbells.builder._htmlparser import BeautifulSoupHTMLParser
 
 from . import HTMLTreeBuilderSmokeTest, SoupTest
 

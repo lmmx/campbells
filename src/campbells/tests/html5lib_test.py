@@ -4,8 +4,8 @@ import warnings
 
 import pytest
 
-from bs4 import BeautifulSoup
-from bs4.element import SoupStrainer
+from campbells import BeautifulSoup
+from campbells.element import SoupStrainer
 
 from . import HTML5LIB_PRESENT, HTML5TreeBuilderSmokeTest, SoupTest
 
@@ -19,7 +19,7 @@ class TestHTML5LibBuilder(SoupTest, HTML5TreeBuilderSmokeTest):
 
     @property
     def default_builder(self):
-        from bs4.builder import HTML5TreeBuilder
+        from campbells.builder import HTML5TreeBuilder
 
         return HTML5TreeBuilder
 

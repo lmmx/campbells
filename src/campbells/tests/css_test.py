@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from bs4 import CSS, BeautifulSoup, ResultSet
+from campbells import CSS, BeautifulSoup, ResultSet
 
 from . import SOUP_SIEVE_PRESENT, SoupTest
 

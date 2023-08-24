@@ -1,4 +1,4 @@
-from bs4.dammit import EntitySubstitution
+from campbells.dammit import EntitySubstitution
 
 
 class Formatter(EntitySubstitution):
@@ -64,7 +64,7 @@ class Formatter(EntitySubstitution):
 
         :param entity_substitution: A function to call to replace special
            characters with XML/HTML entities. For examples, see
-           bs4.dammit.EntitySubstitution.substitute_html and substitute_xml.
+           campbells.dammit.EntitySubstitution.substitute_html and substitute_xml.
         :param void_element_close_prefix: By default, void elements
            are represented as <tag/> (XML rules) rather than <tag>
            (HTML rules). To get <tag>, pass in the empty string.

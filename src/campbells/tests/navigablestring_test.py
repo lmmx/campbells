@@ -1,6 +1,6 @@
 import pytest
 
-from bs4.element import (
+from campbells.element import (
     CData,
     Comment,
     Declaration,

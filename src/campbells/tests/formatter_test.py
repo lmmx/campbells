@@ -1,7 +1,7 @@
 import pytest
 
-from bs4.element import Tag
-from bs4.formatter import Formatter, HTMLFormatter, XMLFormatter
+from campbells.element import Tag
+from campbells.formatter import Formatter, HTMLFormatter, XMLFormatter
 
 from . import SoupTest
 

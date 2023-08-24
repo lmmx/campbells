@@ -10,13 +10,13 @@ import warnings
 
 import pytest
 
-from bs4 import BeautifulSoup
-from bs4.builder import (
+from campbells import BeautifulSoup
+from campbells.builder import (
     DetectsXMLParsedAsHTML,
     HTMLParserTreeBuilder,
     XMLParsedAsHTMLWarning,
 )
-from bs4.element import (
+from campbells.element import (
     PYTHON_SPECIFIC_ENCODINGS,
     CharsetMetaAttributeValue,
     Comment,
