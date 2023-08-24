@@ -17,7 +17,13 @@ from campbells.builder import (
     ParserRejectedMarkup,
 )
 from campbells.dammit import EntitySubstitution, UnicodeDammit
-from campbells.element import CData, Comment, Declaration, Doctype, ProcessingInstruction
+from campbells.element import (
+    CData,
+    Comment,
+    Declaration,
+    Doctype,
+    ProcessingInstruction,
+)
 
 HTMLPARSER = "html.parser"
 
