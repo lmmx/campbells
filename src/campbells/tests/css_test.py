@@ -5,10 +5,10 @@ import pytest
 
 from campbells import CSS, CampbellsSoup, PageElement, ResultSet, Tag
 
-from . import SOUP_SIEVE_PRESENT, SoupTest
+from . import CHINOIS_PRESENT, SoupTest
 
-if SOUP_SIEVE_PRESENT:
-    from soupsieve import SelectorSyntaxError
+if CHINOIS_PRESENT:
+    from chinois import SelectorSyntaxError
 
 
 def is_campbells_tag(cls, obj: PageElement) -> bool:
@@ -19,13 +19,13 @@ def is_campbells_tag(cls, obj: PageElement) -> bool:
 patch("soup_sieve.css_match._DocumentNav.is_tag", is_campbells_tag)
 
 
-@pytest.mark.skipif(not SOUP_SIEVE_PRESENT, reason="Soup Sieve not installed")
+@pytest.mark.skipif(not CHINOIS_PRESENT, reason="Soup Sieve not installed")
 class TestCSSSelectors(SoupTest):
     """Test basic CSS selector functionality.
 
-    This functionality is implemented in soupsieve, which has a much
+    This functionality is implemented in chinois, which has a much
     more comprehensive test suite, so this is basically an extra check
-    that soupsieve works as expected.
+    that chinois works as expected.
     """
 
     HTML = """

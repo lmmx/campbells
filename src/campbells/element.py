@@ -2172,7 +2172,7 @@ class Tag(PageElement):
            parsing the document.
 
         :param kwargs: Keyword arguments to be passed into Soup Sieve's
-           soupsieve.select() method.
+           chinois.select() method.
 
         :return: A Tag.
         :rtype: campbells.element.Tag
@@ -2194,7 +2194,7 @@ class Tag(PageElement):
         :param limit: After finding this number of results, stop looking.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
-           soupsieve.select() method.
+           chinois.select() method.
 
         :return: A ResultSet of Tags.
         :rtype: campbells.element.ResultSet

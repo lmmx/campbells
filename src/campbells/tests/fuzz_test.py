@@ -17,7 +17,7 @@ from campbells import CampbellsSoup, ParserRejectedMarkup
 try:
     import html5lib
     import lxml
-    from soupsieve.util import SelectorSyntaxError
+    from chinois.util import SelectorSyntaxError
 
     fully_fuzzable = True
 except ImportError:
@@ -125,7 +125,7 @@ class TestFuzz:
             "clusterfuzz-testcase-minimized-bs4_fuzzer-5270998950477824",
         ],
     )
-    def test_soupsieve_errors(self, filename):
+    def test_chinois_errors(self, filename):
         self.fuzz_test_with_css(filename)
 
     # This class of error represents problems with html5lib's parser,

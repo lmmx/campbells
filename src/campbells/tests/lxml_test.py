@@ -15,7 +15,7 @@ from campbells import CampbellsSoup
 from campbells.element import Comment, Doctype, SoupStrainer
 
 from . import (
-    SOUP_SIEVE_PRESENT,
+    CHINOIS_PRESENT,
     HTMLTreeBuilderSmokeTest,
     SoupTest,
     XMLTreeBuilderSmokeTest,
@@ -102,7 +102,7 @@ class TestLXMLXMLTreeBuilder(SoupTest, XMLTreeBuilderSmokeTest):
 
         # The CampbellsSoup object includes every namespace prefix
         # defined in the entire document. This is the default set of
-        # namespaces used by soupsieve.
+        # namespaces used by chinois.
         #
         # Un-prefixed namespaces are not included, and if a given
         # prefix is defined twice, only the first prefix encountered
@@ -118,7 +118,7 @@ class TestLXMLXMLTreeBuilder(SoupTest, XMLTreeBuilderSmokeTest):
 
         # We do not track un-prefixed namespaces as we can only hold
         # one (the first one), and it will be recognized as the
-        # default namespace by soupsieve, even when operating from a
+        # default namespace by chinois, even when operating from a
         # tag with a different un-prefixed namespace.
         assert soup.tag._namespaces == {
             "xml": "http://www.w3.org/XML/1998/namespace",
@@ -139,7 +139,7 @@ class TestLXMLXMLTreeBuilder(SoupTest, XMLTreeBuilderSmokeTest):
             "xml": "http://www.w3.org/XML/1998/namespace",
         }
 
-    @pytest.mark.skipif(not SOUP_SIEVE_PRESENT, reason="Soup Sieve not installed")
+    @pytest.mark.skipif(not CHINOIS_PRESENT, reason="Soup Sieve not installed")
     def test_namespace_interaction_with_select_and_find(self):
         # Demonstrate how namespaces interact with select* and
         # find* methods.

@@ -277,7 +277,7 @@ class LXMLTreeBuilderForXML(TreeBuilder):
             current_mapping.update(nsmap)
 
             # We should not track un-prefixed namespaces as we can only hold one
-            # and it will be recognized as the default namespace by soupsieve,
+            # and it will be recognized as the default namespace by chinois,
             # which may be confusing in some situations.
             if "" in current_mapping:
                 del current_mapping[""]

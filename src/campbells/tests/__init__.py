@@ -29,9 +29,9 @@ default_builder = HTMLParserTreeBuilder
 try:
     pass
 
-    SOUP_SIEVE_PRESENT = True
+    CHINOIS_PRESENT = True
 except ImportError:
-    SOUP_SIEVE_PRESENT = False
+    CHINOIS_PRESENT = False
 
 try:
     pass

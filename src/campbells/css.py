@@ -1,18 +1,18 @@
-"""Integration code for CSS selectors using Soup Sieve (pypi: soupsieve)."""
+"""Integration code for CSS selectors using Soup Sieve (pypi: chinois)."""
 
 import warnings
 
 try:
-    import soupsieve
+    import chinois
 except ImportError:
-    soupsieve = None
+    chinois = None
     warnings.warn(
-        "The soupsieve package is not installed. CSS selectors cannot be used.",
+        "The chinois package is not installed. CSS selectors cannot be used.",
     )
 
 
 class CSS:
-    """A proxy object against the soupsieve library, to simplify its
+    """A proxy object against the chinois library, to simplify its
     CSS selector API.
 
     Acquire this object through the .css attribute on the
@@ -24,7 +24,7 @@ class CSS:
     calls, since it's already scoped to a tag.
     """
 
-    def __init__(self, tag, api=soupsieve):
+    def __init__(self, tag, api=chinois):
         """Constructor.
 
         You don't need to instantiate this class yourself; instead,
@@ -35,12 +35,12 @@ class CSS:
         :param tag: All CSS selectors will use this as their starting
         point.
 
-        :param api: A plug-in replacement for the soupsieve module,
+        :param api: A plug-in replacement for the chinois module,
         designed mainly for use in tests.
         """
         if api is None:
             raise NotImplementedError(
-                "Cannot execute CSS selectors because the soupsieve package is not installed.",
+                "Cannot execute CSS selectors because the chinois package is not installed.",
             )
         self.api = api
         self.tag = tag
@@ -51,9 +51,9 @@ class CSS:
         This is a simple wrapper around soupselect.escape(). See the
         documentation for that function for more information.
         """
-        if soupsieve is None:
+        if chinois is None:
             raise NotImplementedError(
-                "Cannot escape CSS identifiers because the soupsieve package is not installed.",
+                "Cannot escape CSS identifiers because the chinois package is not installed.",
             )
         return self.api.escape(ident)
 
@@ -90,13 +90,13 @@ class CSS:
            parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
-            soupsieve.compile() method.
+            chinois.compile() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
-           soupsieve.compile() method.
+           chinois.compile() method.
 
         :return: A precompiled selector object.
-        :rtype: soupsieve.SoupSieve
+        :rtype: chinois.SoupSieve
         """
         return self.api.compile(select, self._ns(namespaces, select), flags, **kwargs)
 
@@ -105,7 +105,7 @@ class CSS:
         first result.
 
         This uses the Soup Sieve library. For more information, see
-        that library's documentation for the soupsieve.select_one()
+        that library's documentation for the chinois.select_one()
         method.
 
         :param selector: A CSS selector.
@@ -116,10 +116,10 @@ class CSS:
            parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
-            soupsieve.select_one() method.
+            chinois.select_one() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
-           soupsieve.select_one() method.
+           chinois.select_one() method.
 
         :return: A Tag, or None if the selector has no match.
         :rtype: campbells.element.Tag
@@ -137,7 +137,7 @@ class CSS:
         """Perform a CSS selection operation on the current Tag.
 
         This uses the Soup Sieve library. For more information, see
-        that library's documentation for the soupsieve.select()
+        that library's documentation for the chinois.select()
         method.
 
         :param selector: A string containing a CSS selector.
@@ -150,10 +150,10 @@ class CSS:
         :param limit: After finding this number of results, stop looking.
 
         :param flags: Flags to be passed into Soup Sieve's
-            soupsieve.select() method.
+            chinois.select() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
-            soupsieve.select() method.
+            chinois.select() method.
 
         :return: A ResultSet of Tag objects.
         :rtype: campbells.element.ResultSet
@@ -177,7 +177,7 @@ class CSS:
         """Perform a CSS selection operation on the current Tag.
 
         This uses the Soup Sieve library. For more information, see
-        that library's documentation for the soupsieve.iselect()
+        that library's documentation for the chinois.iselect()
         method. It is the same as select(), but it returns a generator
         instead of a list.
 
@@ -191,10 +191,10 @@ class CSS:
         :param limit: After finding this number of results, stop looking.
 
         :param flags: Flags to be passed into Soup Sieve's
-            soupsieve.iselect() method.
+            chinois.iselect() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
-            soupsieve.iselect() method.
+            chinois.iselect() method.
 
         :return: A generator
         :rtype: types.GeneratorType
@@ -212,7 +212,7 @@ class CSS:
         """Find the Tag closest to this one that matches the given selector.
 
         This uses the Soup Sieve library. For more information, see
-        that library's documentation for the soupsieve.closest()
+        that library's documentation for the chinois.closest()
         method.
 
         :param selector: A string containing a CSS selector.
@@ -223,10 +223,10 @@ class CSS:
             parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
-            soupsieve.closest() method.
+            chinois.closest() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
-            soupsieve.closest() method.
+            chinois.closest() method.
 
         :return: A Tag, or None if there is no match.
         :rtype: campbells.Tag
@@ -244,7 +244,7 @@ class CSS:
         """Check whether this Tag matches the given CSS selector.
 
         This uses the Soup Sieve library. For more information, see
-        that library's documentation for the soupsieve.match()
+        that library's documentation for the chinois.match()
         method.
 
         :param: a CSS selector.
@@ -255,10 +255,10 @@ class CSS:
             parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
-            soupsieve.match() method.
+            chinois.match() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
-            soupsieve.match() method.
+            chinois.match() method.
 
         :return: True if this Tag matches the selector; False otherwise.
         :rtype: bool
@@ -275,9 +275,9 @@ class CSS:
         """Filter this Tag's direct children based on the given CSS selector.
 
         This uses the Soup Sieve library. It works the same way as
-        passing this Tag into that library's soupsieve.filter()
+        passing this Tag into that library's chinois.filter()
         method. More information, for more information see the
-        documentation for soupsieve.filter().
+        documentation for chinois.filter().
 
         :param namespaces: A dictionary mapping namespace prefixes
             used in the CSS selector to namespace URIs. By default,
@@ -285,10 +285,10 @@ class CSS:
             parsing the document.
 
         :param flags: Flags to be passed into Soup Sieve's
-            soupsieve.filter() method.
+            chinois.filter() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
-            soupsieve.filter() method.
+            chinois.filter() method.
 
         :return: A ResultSet of Tag objects.
         :rtype: campbells.element.ResultSet
