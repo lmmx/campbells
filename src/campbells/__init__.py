@@ -16,7 +16,7 @@ For more than you ever wanted to know about Beautiful Soup, see their
 documentation: http://www.crummy.com/software/BeautifulSoup/bs4/doc/
 """
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 __all__ = ["CampbellsSoup"]
 
