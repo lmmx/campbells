@@ -24,7 +24,7 @@ classifiers = [
     "Topic :: Text Processing :: Markup :: XML",
 ]
 dependencies = [
-    "beautifulsoup4>=4.12.2",
+    "chinois>=0.1.0",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
