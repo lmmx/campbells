@@ -2171,7 +2171,7 @@ class Tag(PageElement):
            Campbells will use the prefixes it encountered while
            parsing the document.
 
-        :param kwargs: Keyword arguments to be passed into Soup Sieve's
+        :param kwargs: Keyword arguments to be passed into Chinois's
            chinois.select() method.
 
         :return: A Tag.

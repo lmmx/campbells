@@ -19,7 +19,7 @@ def is_campbells_tag(cls, obj: PageElement) -> bool:
 patch("soup_sieve.css_match._DocumentNav.is_tag", is_campbells_tag)
 
 
-@pytest.mark.skipif(not CHINOIS_PRESENT, reason="Soup Sieve not installed")
+@pytest.mark.skipif(not CHINOIS_PRESENT, reason="Chinois not installed")
 class TestCSSSelectors(SoupTest):
     """Test basic CSS selector functionality.
 

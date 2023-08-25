@@ -1,4 +1,4 @@
-"""Integration code for CSS selectors using Soup Sieve (pypi: chinois)."""
+"""Integration code for CSS selectors using Chinois (pypi: chinois)."""
 
 import warnings
 
@@ -89,7 +89,7 @@ class CSS:
            Campbells will use the prefixes it encountered while
            parsing the document.
 
-        :param flags: Flags to be passed into Soup Sieve's
+        :param flags: Flags to be passed into Chinois's
             chinois.compile() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
@@ -104,7 +104,7 @@ class CSS:
         """Perform a CSS selection operation on the current Tag and return the
         first result.
 
-        This uses the Soup Sieve library. For more information, see
+        This uses the Chinois library. For more information, see
         that library's documentation for the chinois.select_one()
         method.
 
@@ -115,7 +115,7 @@ class CSS:
            Campbells will use the prefixes it encountered while
            parsing the document.
 
-        :param flags: Flags to be passed into Soup Sieve's
+        :param flags: Flags to be passed into Chinois's
             chinois.select_one() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
@@ -136,7 +136,7 @@ class CSS:
     def select(self, select, namespaces=None, limit=0, flags=0, **kwargs):
         """Perform a CSS selection operation on the current Tag.
 
-        This uses the Soup Sieve library. For more information, see
+        This uses the Chinois library. For more information, see
         that library's documentation for the chinois.select()
         method.
 
@@ -149,7 +149,7 @@ class CSS:
 
         :param limit: After finding this number of results, stop looking.
 
-        :param flags: Flags to be passed into Soup Sieve's
+        :param flags: Flags to be passed into Chinois's
             chinois.select() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
@@ -176,7 +176,7 @@ class CSS:
     def iselect(self, select, namespaces=None, limit=0, flags=0, **kwargs):
         """Perform a CSS selection operation on the current Tag.
 
-        This uses the Soup Sieve library. For more information, see
+        This uses the Chinois library. For more information, see
         that library's documentation for the chinois.iselect()
         method. It is the same as select(), but it returns a generator
         instead of a list.
@@ -190,7 +190,7 @@ class CSS:
 
         :param limit: After finding this number of results, stop looking.
 
-        :param flags: Flags to be passed into Soup Sieve's
+        :param flags: Flags to be passed into Chinois's
             chinois.iselect() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
@@ -211,7 +211,7 @@ class CSS:
     def closest(self, select, namespaces=None, flags=0, **kwargs):
         """Find the Tag closest to this one that matches the given selector.
 
-        This uses the Soup Sieve library. For more information, see
+        This uses the Chinois library. For more information, see
         that library's documentation for the chinois.closest()
         method.
 
@@ -222,7 +222,7 @@ class CSS:
             Campbells will pass in the prefixes it encountered while
             parsing the document.
 
-        :param flags: Flags to be passed into Soup Sieve's
+        :param flags: Flags to be passed into Chinois's
             chinois.closest() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
@@ -243,7 +243,7 @@ class CSS:
     def match(self, select, namespaces=None, flags=0, **kwargs):
         """Check whether this Tag matches the given CSS selector.
 
-        This uses the Soup Sieve library. For more information, see
+        This uses the Chinois library. For more information, see
         that library's documentation for the chinois.match()
         method.
 
@@ -254,7 +254,7 @@ class CSS:
             Campbells will pass in the prefixes it encountered while
             parsing the document.
 
-        :param flags: Flags to be passed into Soup Sieve's
+        :param flags: Flags to be passed into Chinois's
             chinois.match() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's
@@ -274,7 +274,7 @@ class CSS:
     def filter(self, select, namespaces=None, flags=0, **kwargs):
         """Filter this Tag's direct children based on the given CSS selector.
 
-        This uses the Soup Sieve library. It works the same way as
+        This uses the Chinois library. It works the same way as
         passing this Tag into that library's chinois.filter()
         method. More information, for more information see the
         documentation for chinois.filter().
@@ -284,7 +284,7 @@ class CSS:
             Campbells will pass in the prefixes it encountered while
             parsing the document.
 
-        :param flags: Flags to be passed into Soup Sieve's
+        :param flags: Flags to be passed into Chinois's
             chinois.filter() method.
 
         :param kwargs: Keyword arguments to be passed into SoupSieve's

@@ -139,7 +139,7 @@ class TestLXMLXMLTreeBuilder(SoupTest, XMLTreeBuilderSmokeTest):
             "xml": "http://www.w3.org/XML/1998/namespace",
         }
 
-    @pytest.mark.skipif(not CHINOIS_PRESENT, reason="Soup Sieve not installed")
+    @pytest.mark.skipif(not CHINOIS_PRESENT, reason="Chinois not installed")
     def test_namespace_interaction_with_select_and_find(self):
         # Demonstrate how namespaces interact with select* and
         # find* methods.
