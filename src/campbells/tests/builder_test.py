@@ -19,7 +19,7 @@ class TestDetectsXMLParsedAsHTML:
     def test_warn_if_markup_looks_like_xml(self, markup, looks_like_xml):
         # Test of our ability to guess at whether markup looks XML-ish
         # _and_ not HTML-ish.
-        with patch("campbells.builder.DetectsXMLParsedAsHTML._warn") as mock:
+        with patch("campbells.builder.build.DetectsXMLParsedAsHTML._warn") as mock:
             for data in markup, markup.encode("utf8"):
                 result = DetectsXMLParsedAsHTML.warn_if_markup_looks_like_xml(data)
                 assert result == looks_like_xml

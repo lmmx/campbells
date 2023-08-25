@@ -1,14 +1,22 @@
 import types
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
-from campbells import CSS, CampbellsSoup, ResultSet
+from campbells import CSS, CampbellsSoup, PageElement, ResultSet, Tag
 
 from . import SOUP_SIEVE_PRESENT, SoupTest
 
 if SOUP_SIEVE_PRESENT:
     from soupsieve import SelectorSyntaxError
+
+
+def is_campbells_tag(cls, obj: PageElement) -> bool:
+    """Is tag."""
+    return isinstance(obj, Tag)
+
+
+patch("soup_sieve.css_match._DocumentNav.is_tag", is_campbells_tag)
 
 
 @pytest.mark.skipif(not SOUP_SIEVE_PRESENT, reason="Soup Sieve not installed")
