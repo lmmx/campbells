@@ -1,11 +1,6 @@
 from .features import FAST, HTML, HTML_5, PERMISSIVE, STRICT, XML
-from .main import (
-    HTMLTreeBuilder,
-    ParserRejectedMarkup,
-    SAXTreeBuilder,
-    TreeBuilder,
-    TreeBuilderRegistry,
-)
+from .main import HTMLTreeBuilder, ParserRejectedMarkup, SAXTreeBuilder, TreeBuilder
+from .registry import TreeBuilderRegistry
 from .xml import DetectsXMLParsedAsHTML, XMLParsedAsHTMLWarning
 
 __all__ = [
