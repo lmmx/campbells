@@ -167,6 +167,22 @@ class HTMLFormatter(Formatter):
     def __init__(self, *args, **kwargs):
         super().__init__(self.HTML, *args, **kwargs)
 
+    @classmethod
+    def set_up_aliases(cls):
+        """Set up aliases for the default HTML formatters."""
+        cls.REGISTRY["html"] = cls(
+            entity_substitution=EntitySubstitution.substitute_html,
+        )
+        cls.REGISTRY["html5"] = cls(
+            entity_substitution=EntitySubstitution.substitute_html,
+            void_element_close_prefix=None,
+            empty_attributes_are_booleans=True,
+        )
+        cls.REGISTRY["minimal"] = cls(
+            entity_substitution=EntitySubstitution.substitute_xml,
+        )
+        cls.REGISTRY[None] = cls(entity_substitution=None)
+
 
 class XMLFormatter(Formatter):
     """A generic Formatter for XML."""
@@ -176,26 +192,17 @@ class XMLFormatter(Formatter):
     def __init__(self, *args, **kwargs):
         super().__init__(self.XML, *args, **kwargs)
 
+    @classmethod
+    def set_up_aliases(cls):
+        """Set up aliases for the default XML formatters."""
+        cls.REGISTRY["html"] = cls(
+            entity_substitution=EntitySubstitution.substitute_html,
+        )
+        cls.REGISTRY["minimal"] = cls(
+            entity_substitution=EntitySubstitution.substitute_xml,
+        )
+        cls.REGISTRY[None] = Formatter(Formatter.XML, entity_substitution=None)
 
-# Set up aliases for the default formatters.
-HTMLFormatter.REGISTRY["html"] = HTMLFormatter(
-    entity_substitution=EntitySubstitution.substitute_html,
-)
-HTMLFormatter.REGISTRY["html5"] = HTMLFormatter(
-    entity_substitution=EntitySubstitution.substitute_html,
-    void_element_close_prefix=None,
-    empty_attributes_are_booleans=True,
-)
-HTMLFormatter.REGISTRY["minimal"] = HTMLFormatter(
-    entity_substitution=EntitySubstitution.substitute_xml,
-)
-HTMLFormatter.REGISTRY[None] = HTMLFormatter(entity_substitution=None)
-XMLFormatter.REGISTRY["html"] = XMLFormatter(
-    entity_substitution=EntitySubstitution.substitute_html,
-)
-XMLFormatter.REGISTRY["minimal"] = XMLFormatter(
-    entity_substitution=EntitySubstitution.substitute_xml,
-)
-XMLFormatter.REGISTRY[None] = Formatter(
-    Formatter(Formatter.XML, entity_substitution=None),
-)
+
+HTMLFormatter.set_up_aliases()
+XMLFormatter.set_up_aliases()
