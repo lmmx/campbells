@@ -11,7 +11,7 @@ from collections.abc import Callable
 # )
 # from .core import PageElement
 from .encodings import DEFAULT_OUTPUT_ENCODING, PYTHON_SPECIFIC_ENCODINGS
-from .original import (  # DEFAULT_OUTPUT_ENCODING,; PYTHON_SPECIFIC_ENCODINGS,
+from .original import (  # DEFAULT_OUTPUT_ENCODING,; PYTHON_SPECIFIC_ENCODINGS,; nonwhitespace_re,; whitespace_re,
     AttributeValueWithCharsetSubstitution,
     CData,
     CharsetMetaAttributeValue,
@@ -33,8 +33,6 @@ from .original import (  # DEFAULT_OUTPUT_ENCODING,; PYTHON_SPECIFIC_ENCODINGS,
     Tag,
     TemplateString,
     XMLProcessingInstruction,
-    nonwhitespace_re,
-    whitespace_re,
 )
 
 # from .results import ResultSet, SoupStrainer
@@ -54,7 +52,7 @@ from .original import (  # DEFAULT_OUTPUT_ENCODING,; PYTHON_SPECIFIC_ENCODINGS,
 #     TemplateString,
 #     XMLProcessingInstruction,
 # )
-# from .whitespace import nonwhitespace_re, whitespace_re
+from .whitespace import nonwhitespace_re, whitespace_re
 
 __all__ = [
     "AttributeValueWithCharsetSubstitution",
