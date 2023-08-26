@@ -26,9 +26,9 @@ from collections import Counter
 
 from .builder import HTMLParserTreeBuilder
 from .builder.build import ParserRejectedMarkup, XMLParsedAsHTMLWarning
+from .css import CSS
 from .dammit import UnicodeDammit
 from .element import (
-    CSS,
     DEFAULT_OUTPUT_ENCODING,
     PYTHON_SPECIFIC_ENCODINGS,
     CData,

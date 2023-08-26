@@ -20,7 +20,6 @@ from campbells.element import (
     Comment,
     Declaration,
     Doctype,
-    Formatter,
     NavigableString,
     Script,
     SoupStrainer,
@@ -28,6 +27,7 @@ from campbells.element import (
     Tag,
     TemplateString,
 )
+from campbells.formatter import Formatter
 
 from . import SoupTest
 

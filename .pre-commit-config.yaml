@@ -69,6 +69,7 @@ repos:
     rev: 6.1.0
     hooks:
       - id: flake8
+        exclude: refactor/
         args:
           [
             "--max-line-length=88",
