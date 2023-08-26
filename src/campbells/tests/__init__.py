@@ -27,14 +27,14 @@ default_builder = HTMLParserTreeBuilder
 # @pytest.mark.skipIf on the following conditionals to skip them
 # if the libraries are not installed.
 try:
-    pass
+    from chinois import SelectorSyntaxError  # noqa: ignore
 
     CHINOIS_PRESENT = True
 except ImportError:
     CHINOIS_PRESENT = False
 
 try:
-    pass
+    import html5lib  # noqa: ignore
 
     HTML5LIB_PRESENT = True
 except ImportError:
