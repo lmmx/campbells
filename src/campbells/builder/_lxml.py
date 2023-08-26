@@ -3,13 +3,10 @@ from io import BytesIO, StringIO
 
 from lxml import etree
 
-from campbells.builder.core import (
-    DetectsXMLParsedAsHTML,
-    HTMLTreeBuilder,
-    ParserRejectedMarkup,
-    TreeBuilder,
-)
 from campbells.builder.core.features import FAST, HTML, PERMISSIVE, XML
+from campbells.builder.core.html_builder import HTMLTreeBuilder
+from campbells.builder.core.main import ParserRejectedMarkup, TreeBuilder
+from campbells.builder.core.xml import DetectsXMLParsedAsHTML
 from campbells.dammit import EncodingDetector
 from campbells.element import (
     Comment,

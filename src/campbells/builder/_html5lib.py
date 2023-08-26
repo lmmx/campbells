@@ -6,8 +6,9 @@ import warnings
 import html5lib
 from html5lib.constants import namespaces, prefixes
 
-from campbells.builder.core import DetectsXMLParsedAsHTML, HTMLTreeBuilder
 from campbells.builder.core.features import HTML, HTML_5, PERMISSIVE
+from campbells.builder.core.html_builder import HTMLTreeBuilder
+from campbells.builder.core.xml import DetectsXMLParsedAsHTML
 from campbells.element import (
     Comment,
     Doctype,
