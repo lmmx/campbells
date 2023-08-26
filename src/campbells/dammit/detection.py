@@ -119,23 +119,19 @@ class EncodingDetector:
         :yield: A sequence of strings.
         """
         tried = set()
-
         # First, try the known definite encodings
         for e in self.known_definite_encodings:
             if self._usable(e, tried):
                 yield e
-
         # Did the document originally start with a byte-order mark
         # that indicated its encoding?
         if self._usable(self.sniffed_encoding, tried):
             yield self.sniffed_encoding
-
         # Sniffing the byte-order mark did nothing; try the user
         # encodings.
         for e in self.user_encodings:
             if self._usable(e, tried):
                 yield e
-
         # Look within the document for an XML or HTML encoding
         # declaration.
         if self.declared_encoding is None:
@@ -145,14 +141,12 @@ class EncodingDetector:
             )
         if self._usable(self.declared_encoding, tried):
             yield self.declared_encoding
-
         # Use third-party character set detection to guess at the
         # encoding.
         if self.chardet_encoding is None:
             self.chardet_encoding = chardet_dammit(self.markup)
         if self._usable(self.chardet_encoding, tried):
             yield self.chardet_encoding
-
         # As a last-ditch effort, try utf-8 and windows-1252.
         for e in ("utf-8", "windows-1252"):
             if self._usable(e, tried):
@@ -214,12 +208,10 @@ class EncodingDetector:
         else:
             xml_endpos = 1024
             html_endpos = max(2048, int(len(markup) * 0.05))
-
         if isinstance(markup, bytes):
             res = encoding_res[bytes]
         else:
             res = encoding_res[str]
-
         xml_re = res["xml"]
         html_re = res["html"]
         declared_encoding = None
@@ -246,7 +238,6 @@ class UnicodeDammit:
     # values that aren't in Python's aliases and can't be determined
     # by the heuristics in find_codec.
     CHARSET_ALIASES = {"macintosh": "mac-roman", "x-sjis": "shift-jis"}
-
     ENCODINGS_WITH_SMART_QUOTES = ["windows-1252", "iso-8859-1", "iso-8859-2"]
 
     def __init__(
@@ -306,29 +297,24 @@ class UnicodeDammit:
             user_encodings,
             override_encodings,
         )
-
         # Short-circuit if the data is in Unicode to begin with.
         if isinstance(markup, str) or markup == "":
             self.markup = markup
             self.unicode_markup = str(markup)
             self.original_encoding = None
             return
-
         # The encoding detector may have stripped a byte-order mark.
         # Use the stripped markup from this point on.
         self.markup = self.detector.markup
-
         u = None
         for encoding in self.detector.encodings:
             markup = self.detector.markup
             u = self._convert_from(encoding)
             if u is not None:
                 break
-
         if not u:
             # None of the encodings worked. As an absolute last resort,
             # try them again with character replacement.
-
             for encoding in self.detector.encodings:
                 if encoding != "ascii":
                     u = self._convert_from(encoding, "replace")
@@ -339,7 +325,6 @@ class UnicodeDammit:
                     )
                     self.contains_replacement_characters = True
                     break
-
         # If none of that worked, we could at this point force it to
         # ASCII, but that would destroy so much data that I think
         # giving up is better.
@@ -383,7 +368,6 @@ class UnicodeDammit:
             smart_quotes_re = b"([\x80-\x9f])"
             smart_quotes_compiled = re.compile(smart_quotes_re)
             markup = smart_quotes_compiled.sub(self._sub_ms_char, markup)
-
         try:
             # print(f"Trying to convert document to {proposed} ({errors=})")
             self.markup = self._to_unicode(markup, proposed, errors)
@@ -405,9 +389,7 @@ class UnicodeDammit:
         """If the markup is an HTML document, returns the encoding declared _within_
         the document.
         """
-        if not self.is_html:
-            return None
-        return self.detector.declared_encoding
+        return self.detector.declared_encoding if self.is_html else None
 
     def find_codec(self, charset):
         """Convert the name of a character set to a codec name.
@@ -422,9 +404,7 @@ class UnicodeDammit:
             or (charset and charset.lower())
             or charset
         )
-        if value:
-            return value.lower()
-        return None
+        return value.lower() if value else None
 
     def _codec(self, charset):
         if not charset:
@@ -777,21 +757,15 @@ class UnicodeDammit:
                 "Windows-1252 and ISO-8859-1 are the only currently supported "
                 "embedded encodings.",
             )
-
         if main_encoding.lower() not in ("utf8", "utf-8"):
             raise NotImplementedError(
                 "UTF-8 is the only currently supported main encoding.",
             )
-
         byte_chunks = []
-
         chunk_start = 0
         pos = 0
         while pos < len(in_bytes):
             byte = in_bytes[pos]
-            if not isinstance(byte, int):
-                # Python 2.x
-                byte = ord(byte)
             if byte >= cls.FIRST_MULTIBYTE_MARKER and byte <= cls.LAST_MULTIBYTE_MARKER:
                 # This is the start of a UTF-8 multibyte character. Skip
                 # to the end.
@@ -803,7 +777,6 @@ class UnicodeDammit:
                 # We found a Windows-1252 character!
                 # Save the string up to this point as a chunk.
                 byte_chunks.append(in_bytes[chunk_start:pos])
-
                 # Now translate the Windows-1252 character into UTF-8
                 # and add it as another, one-byte chunk.
                 byte_chunks.append(cls.WINDOWS_1252_TO_UTF8[byte])

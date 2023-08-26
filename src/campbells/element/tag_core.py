@@ -2209,16 +2209,11 @@ class SoupStrainer:
             return new_value
 
         # Otherwise, convert it into a Unicode string.
-        # The unicode(str()) thing is so this will do the same thing on Python 2
-        # and Python 3.
-        return str(str(value))
+        return str(value)
 
     def __str__(self):
         """A human-readable representation of this SoupStrainer."""
-        if self.string:
-            return self.string
-        else:
-            return f"{self.name}|{self.attrs}"
+        return self.string or f"{self.name}|{self.attrs}"
 
     def search_tag(self, markup_name=None, markup_attrs={}):
         """Check whether a Tag with the given name and attributes would
