@@ -1,8 +1,5 @@
 """Diagnostic functions, mainly for use when doing tech support."""
 
-# Use of this source code is governed by the MIT license.
-__license__ = "MIT"
-
 import cProfile
 import pstats
 import random
@@ -17,6 +14,9 @@ import campbells
 from campbells import CampbellsSoup, __version__
 from campbells.builder import builder_registry
 
+_vowels = "aeiou"
+_consonants = "bcdfghjklmnpqrstvwxyz"
+
 
 def diagnose(data):
     """Diagnostic suite for isolating common problems.
@@ -24,9 +24,8 @@ def diagnose(data):
     :param data: A string containing markup that needs to be explained.
     :return: None; diagnostics are printed to standard output.
     """
-    print("Diagnostic running on Campbells %s" % __version__)
-    print("Python version %s" % sys.version)
-
+    print(f"Diagnostic running on Campbells {__version__}")
+    print(f"Python version {sys.version}")
     basic_parsers = ["html.parser", "html5lib", "lxml"]
     for name in basic_parsers:
         for builder in builder_registry.builders:
@@ -34,10 +33,7 @@ def diagnose(data):
                 break
         else:
             basic_parsers.remove(name)
-            print(
-                ("I noticed that %s is not installed. Installing it may help." % name),
-            )
-
+            print(f"{name} is not installed. Installing it may help.")
     if "lxml" in basic_parsers:
         basic_parsers.append("lxml-xml")
         try:
@@ -46,7 +42,6 @@ def diagnose(data):
             print("Found lxml version %s" % ".".join(map(str, etree.LXML_VERSION)))
         except ImportError:
             print("lxml is not installed or couldn't be imported.")
-
     if "html5lib" in basic_parsers:
         try:
             import html5lib
@@ -54,10 +49,8 @@ def diagnose(data):
             print("Found html5lib version %s" % html5lib.__version__)
         except ImportError:
             print("html5lib is not installed or couldn't be imported.")
-
     if hasattr(data, "read"):
         data = data.read()
-
     for parser in basic_parsers:
         print("Trying to parse your markup with %s" % parser)
         success = False
@@ -70,7 +63,6 @@ def diagnose(data):
         if success:
             print("Here's what %s did with the markup:" % parser)
             print(soup.prettify())
-
         print("-" * 80)
 
 
@@ -108,31 +100,31 @@ class AnnouncingParser(HTMLParser):
         print(s)
 
     def handle_starttag(self, name, attrs):
-        self._p("%s START" % name)
+        self._p(f"{name} START")
 
     def handle_endtag(self, name):
-        self._p("%s END" % name)
+        self._p(f"{name} END")
 
     def handle_data(self, data):
-        self._p("%s DATA" % data)
+        self._p(f"{data} DATA")
 
     def handle_charref(self, name):
-        self._p("%s CHARREF" % name)
+        self._p(f"{name} CHARREF")
 
     def handle_entityref(self, name):
-        self._p("%s ENTITYREF" % name)
+        self._p(f"{name} ENTITYREF")
 
     def handle_comment(self, data):
-        self._p("%s COMMENT" % data)
+        self._p(f"{data} COMMENT")
 
     def handle_decl(self, data):
-        self._p("%s DECL" % data)
+        self._p(f"{data} DECL")
 
     def unknown_decl(self, data):
-        self._p("%s UNKNOWN-DECL" % data)
+        self._p(f"{data} UNKNOWN-DECL")
 
     def handle_pi(self, data):
-        self._p("%s PI" % data)
+        self._p(f"{data} PI")
 
 
 def htmlparser_trace(data):
@@ -145,10 +137,6 @@ def htmlparser_trace(data):
     """
     parser = AnnouncingParser()
     parser.feed(data)
-
-
-_vowels = "aeiou"
-_consonants = "bcdfghjklmnpqrstvwxyz"
 
 
 def rword(length=5):
@@ -204,7 +192,7 @@ def benchmark_parsers(num_elements=100000):
             print("%s could not parse the markup." % parser)
             traceback.print_exc()
         if success:
-            print(f"BS4+{parser} parsed the markup in {b - a:.2f}s.")
+            print(f"Campbells+{parser} parsed the markup in {b - a:.2f}s.")
 
     from lxml import etree
 
@@ -226,17 +214,14 @@ def profile(num_elements=100000, parser="lxml"):
     """Use Python's profiler on a randomly generated document."""
     filehandle = tempfile.NamedTemporaryFile()
     filename = filehandle.name
-
     data = rdoc(num_elements)
     vars = dict(campbells=campbells, data=data, parser=parser)
     cProfile.runctx("campbells.CampbellsSoup(data, parser)", vars, vars, filename)
-
     stats = pstats.Stats(filename)
-    # stats.strip_dirs()
     stats.sort_stats("cumulative")
     stats.print_stats("_html5lib|campbells", 50)
 
 
-# If this file is run as a script, standard input is diagnosed.
-if __name__ == "__main__":
+def diagnose_html():
+    """If this file is run as a script, standard input is diagnosed."""
     diagnose(sys.stdin.read())
