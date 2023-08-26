@@ -18,6 +18,7 @@ __all__ = [
     "CampbellsSoup",
     "StopParsing",
     "FeatureNotFound",
+    "prettify_html",
 ]
 
 
@@ -855,7 +856,7 @@ class FeatureNotFound(ValueError):
     """
 
 
-# If this file is run as a script, act as an HTML pretty-printer.
-if __name__ == "__main__":
+def prettify_html():
+    """If this file is run as a script, act as an HTML pretty-printer."""
     soup = CampbellsSoup(sys.stdin)
     print(soup.prettify())

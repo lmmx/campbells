@@ -37,9 +37,14 @@ html5lib = [
 lxml = [
     "lxml>=4.9.3",
 ]
+
 [project.urls]
 Homepage = "https://github.com/lmmx/campbells"
 Repository = "https://github.com/lmmx/campbells.git"
+
+[project.scripts]
+campbells = "campbells.main:prettify_html"
+
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
