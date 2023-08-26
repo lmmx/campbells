@@ -5,16 +5,16 @@ necessary. It is heavily based on code from Mark Pilgrim's Universal
 Feed Parser. It works best on XML and HTML, but it does not rewrite the
 XML or HTML to reflect a new encoding; that's the tree builder's job.
 """
-# Use of this source code is governed by the MIT license.
-from html.entities import html5
-
-__license__ = "MIT"
-
 import codecs
 import logging
 import re
 from collections import defaultdict
-from html.entities import codepoint2name
+from contextlib import suppress
+
+# Use of this source code is governed by the MIT license.
+from html.entities import codepoint2name, html5
+
+__all__ = ["chardet_dammit", "EntitySubstitution", "EncodingDetector", "UnicodeDammit"]
 
 # Import a library to autodetect character encodings. We'll support
 # any of a number of libraries that all support the same API:
@@ -32,24 +32,16 @@ except ImportError:
         #  PyPI package: chardet
         import chardet as chardet_module
     except ImportError:
-        try:
+        with suppress(ImportError):
             # PyPI package: charset-normalizer
             import charset_normalizer as chardet_module
-        except ImportError:
-            # No chardet available.
-            chardet_module = None
 
-if chardet_module:
 
-    def chardet_dammit(s):
-        if isinstance(s, str):
-            return None
-        return chardet_module.detect(s)["encoding"]
-
-else:
-
-    def chardet_dammit(s):
+def chardet_dammit(s):
+    if chardet_module is None or isinstance(s, str):
         return None
+    else:
+        return chardet_module.detect(s)["encoding"]
 
 
 # Build bytestring and Unicode versions of regular expressions for finding
