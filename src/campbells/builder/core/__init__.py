@@ -13,6 +13,8 @@ from campbells.element import (
     nonwhitespace_re,
 )
 
+from .features import FAST, HTML, HTML_5, PERMISSIVE, STRICT, XML
+
 __all__ = [
     "FAST",
     "PERMISSIVE",
@@ -28,14 +30,6 @@ __all__ = [
     "DetectsXMLParsedAsHTML",
     "ParserRejectedMarkup",
 ]
-
-# Some useful features for a TreeBuilder to have.
-FAST = "fast"
-PERMISSIVE = "permissive"
-STRICT = "strict"
-XML = "xml"
-HTML = "html"
-HTML_5 = "html5"
 
 
 class XMLParsedAsHTMLWarning(UserWarning):

@@ -16,7 +16,7 @@ from campbells import (
     dammit,
 )
 from campbells.builder import builder_registry
-from campbells.builder.build import ParserRejectedMarkup, TreeBuilder
+from campbells.builder.core import ParserRejectedMarkup, TreeBuilder
 from campbells.element import (
     PYTHON_SPECIFIC_ENCODINGS,
     Comment,

@@ -1,6 +1,4 @@
-__all__ = [
-    "HTML5TreeBuilder",
-]
+__all__ = ["HTML5TreeBuilder"]
 
 import re
 import warnings
@@ -8,13 +6,8 @@ import warnings
 import html5lib
 from html5lib.constants import namespaces, prefixes
 
-from campbells.builder.build import (
-    HTML,
-    HTML_5,
-    PERMISSIVE,
-    DetectsXMLParsedAsHTML,
-    HTMLTreeBuilder,
-)
+from campbells.builder.core import DetectsXMLParsedAsHTML, HTMLTreeBuilder
+from campbells.builder.core.features import HTML, HTML_5, PERMISSIVE
 from campbells.element import (
     Comment,
     Doctype,

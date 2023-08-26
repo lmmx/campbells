@@ -8,7 +8,7 @@ import pytest
 
 from campbells import CampbellsSoup
 from campbells.builder._htmlparser import HTMLParserTreeBuilder
-from campbells.builder.build import XMLParsedAsHTMLWarning
+from campbells.builder.core import XMLParsedAsHTMLWarning
 from campbells.element import (
     PYTHON_SPECIFIC_ENCODINGS,
     CharsetMetaAttributeValue,

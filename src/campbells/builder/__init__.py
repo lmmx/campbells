@@ -1,7 +1,7 @@
 from contextlib import suppress
 
 from ._htmlparser import HTMLParserTreeBuilder
-from .build import TreeBuilder, TreeBuilderRegistry
+from .core import TreeBuilder, TreeBuilderRegistry
 
 __all__ = ["builder_registry", "register_treebuilders_from", "HTMLParserTreeBuilder"]
 

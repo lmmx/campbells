@@ -2,13 +2,12 @@
 
 from html.parser import HTMLParser
 
-from campbells.builder.build import (
-    HTML,
-    STRICT,
+from campbells.builder.core import (
     DetectsXMLParsedAsHTML,
     HTMLTreeBuilder,
     ParserRejectedMarkup,
 )
+from campbells.builder.core.features import HTML, STRICT
 from campbells.dammit import EntitySubstitution, UnicodeDammit
 from campbells.element import (
     CData,
