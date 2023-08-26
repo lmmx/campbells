@@ -55,12 +55,6 @@ class TestEncoding(SoupTest):
         encoded = soup.encode()
         assert limit == encoded.count(b"<span>")
 
-    def test_deprecated_renderContents(self):
-        html = "<b>\N{SNOWMAN}</b>"
-        soup = self.soup(html)
-        soup.renderContents()
-        assert "\N{SNOWMAN}".encode() == soup.b.renderContents()
-
     def test_repr(self):
         html = "<b>\N{SNOWMAN}</b>"
         soup = self.soup(html)

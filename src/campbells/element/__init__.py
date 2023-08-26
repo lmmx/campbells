@@ -3,23 +3,18 @@ from __future__ import annotations
 import warnings
 from collections.abc import Callable
 
-# from .attributes import (
-#     AttributeValueWithCharsetSubstitution,
-#     CharsetMetaAttributeValue,
-#     ContentMetaAttributeValue,
-#     NamespacedAttribute,
-# )
-# from .core import PageElement
-from .encodings import DEFAULT_OUTPUT_ENCODING, PYTHON_SPECIFIC_ENCODINGS
-from .original import (  # DEFAULT_OUTPUT_ENCODING,; PYTHON_SPECIFIC_ENCODINGS,; nonwhitespace_re,; whitespace_re,
+from .attributes import (
     AttributeValueWithCharsetSubstitution,
-    CData,
     CharsetMetaAttributeValue,
-    Comment,
     ContentMetaAttributeValue,
+    NamespacedAttribute,
+)
+from .encodings import DEFAULT_OUTPUT_ENCODING, PYTHON_SPECIFIC_ENCODINGS
+from .tag_core import (
+    CData,
+    Comment,
     Declaration,
     Doctype,
-    NamespacedAttribute,
     NavigableString,
     PageElement,
     PreformattedString,
@@ -34,24 +29,6 @@ from .original import (  # DEFAULT_OUTPUT_ENCODING,; PYTHON_SPECIFIC_ENCODINGS,;
     TemplateString,
     XMLProcessingInstruction,
 )
-
-# from .results import ResultSet, SoupStrainer
-# from .tag import Tag
-# from .text_strings import (
-#     CData,
-#     Comment,
-#     Declaration,
-#     Doctype,
-#     NavigableString,
-#     PreformattedString,
-#     ProcessingInstruction,
-#     RubyParenthesisString,
-#     RubyTextString,
-#     Script,
-#     Stylesheet,
-#     TemplateString,
-#     XMLProcessingInstruction,
-# )
 from .whitespace import nonwhitespace_re, whitespace_re
 
 __all__ = [

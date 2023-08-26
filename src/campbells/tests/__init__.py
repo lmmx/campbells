@@ -1002,20 +1002,21 @@ Hello, world!
         ]:
             soup = self.soup(markup)
             for encoding in PYTHON_SPECIFIC_ENCODINGS:
-                if encoding in (
+                # For one reason or another, these will raise an exception
+                # if we actually try to use them, so don't bother.
+                encodings_to_skip = (
                     "idna",
                     "mbcs",
                     "oem",
                     "undefined",
                     "string_escape",
                     "string-escape",
-                ):
-                    # For one reason or another, these will raise an
-                    # exception if we actually try to use them, so don't
-                    # bother.
+                )
+                if encoding in encodings_to_skip:
                     continue
                 encoded = soup.encode(encoding)
-                assert b'meta charset=""' in encoded
+                empty_charset_in_enc = b'meta charset=""' in encoded
+                assert empty_charset_in_enc
                 assert encoding.encode("ascii") not in encoded
 
     def test_tag_with_no_attributes_can_have_attributes_added(self):
