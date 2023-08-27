@@ -23,7 +23,7 @@ pre-commit run --all-files && pdm run python -m pytest
 
 ## Examples
 
-To parse a string as HTML, your reciple should call for `CampbellsSoup`:
+To parse a string as HTML, your recipe should call for `CampbellsSoup`:
 
 ```py
 from campbells import CampbellsSoup
