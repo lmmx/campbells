@@ -52,7 +52,6 @@ class HTMLTreeBuilder(TreeBuilder):
         "nextid",
         "spacer",
     }
-
     # The HTML standard defines these as block-level elements. Beautiful
     # Soup does not treat these elements differently from other elements,
     # but it may do so eventually, and this information is available if
@@ -94,7 +93,6 @@ class HTMLTreeBuilder(TreeBuilder):
         "ul",
         "video",
     }
-
     # These HTML tags need special treatment so they can be
     # represented by a string class other than NavigableString.
     #
@@ -118,7 +116,6 @@ class HTMLTreeBuilder(TreeBuilder):
         "script": Script,
         "template": TemplateString,
     }
-
     # The HTML standard defines these attributes as containing a
     # space-separated list of values, not a single value. That is,
     # class="foo bar" means that the 'class' attribute has two values,
@@ -140,7 +137,6 @@ class HTMLTreeBuilder(TreeBuilder):
         "iframe": ["sandbox"],
         "output": ["for"],
     }
-
     DEFAULT_PRESERVE_WHITESPACE_TAGS = {"pre", "textarea"}
 
     def set_up_substitutions(self, tag):
@@ -157,11 +153,9 @@ class HTMLTreeBuilder(TreeBuilder):
         # We are only interested in <meta> tags
         if tag.name != "meta":
             return False
-
         http_equiv = tag.get("http-equiv")
         content = tag.get("content")
         charset = tag.get("charset")
-
         # We are interested in <meta> tags that say what encoding the
         # document was originally in. This means HTML 5-style <meta>
         # tags that provide the "charset" attribute. It also means
@@ -177,7 +171,6 @@ class HTMLTreeBuilder(TreeBuilder):
             # <meta charset="utf8">
             meta_encoding = charset
             tag["charset"] = CharsetMetaAttributeValue(charset)
-
         elif (
             content is not None
             and http_equiv is not None
@@ -186,5 +179,4 @@ class HTMLTreeBuilder(TreeBuilder):
             # HTML 4 style:
             # <meta http-equiv="content-type" content="text/html; charset=utf8">
             tag["content"] = ContentMetaAttributeValue(content)
-
         return meta_encoding is not None
