@@ -1,6 +1,36 @@
+"""
+The main class `TreeBuilder` is a base for the `HTMLBuilder` which is then specified at
+the parser level for the stdlib HTML parser, the HTML5lib parser, and the lxml parser.
+
+`TreeBuilder` sets 9 methods:
+- `__init__`
+- `initialize_soup`
+- `reset`
+- `can_be_empty_element`
+- `feed`
+- `prepare_markup`
+- `test_fragment_to_document`
+- `set_up_substitutions`
+- `_replace_cdata_list_attribute_values`
+
+and 5 class variables
+- `NAME`
+- `ALTERNATE_NAMES`
+- `features`
+- `is_xml`
+- `picklable`
+- `empty_element_tags`
+- `DEFAULT_CDATA_LIST_ATTRIBUTES`
+- `DEFAULT_PRESERVE_WHITESPACE_TAGS`
+- `DEFAULT_STRING_CONTAINERS`
+- `USE_DEFAULT`
+- `TRACKS_LINE_NUMBERS`
+"""
 from collections import defaultdict
 
 from campbells.element import nonwhitespace_re
+
+from .parser_names import INIT
 
 __all__ = ["TreeBuilder", "ParserRejectedMarkup"]
 
@@ -8,7 +38,7 @@ __all__ = ["TreeBuilder", "ParserRejectedMarkup"]
 class TreeBuilder:
     """Turn a textual document into a Campbells object tree."""
 
-    NAME = "[Unknown tree builder]"
+    NAME = INIT
     ALTERNATE_NAMES = []
     features = []
 

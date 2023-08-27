@@ -6,6 +6,7 @@ from lxml import etree
 from campbells.builder.core.features import FAST, HTML, PERMISSIVE, XML
 from campbells.builder.core.html_builder import HTMLTreeBuilder
 from campbells.builder.core.main import ParserRejectedMarkup, TreeBuilder
+from campbells.builder.core.parser_names import LXML, LXML_HTML, LXML_XML
 from campbells.builder.core.xml import DetectsXMLParsedAsHTML
 from campbells.dammit import EncodingDetector
 from campbells.element import (
@@ -16,39 +17,27 @@ from campbells.element import (
     XMLProcessingInstruction,
 )
 
+from .util import _invert
+
 __all__ = [
     "LXMLTreeBuilderForXML",
     "LXMLTreeBuilder",
 ]
 
-LXML = "lxml"
-
-
-def _invert(d):
-    "Invert a dictionary."
-    return {v: k for k, v in list(d.items())}
-
 
 class LXMLTreeBuilderForXML(TreeBuilder):
     DEFAULT_PARSER_CLASS = etree.XMLParser
-
     is_xml = True
     processing_instruction_class = XMLProcessingInstruction
-
-    NAME = "lxml-xml"
-    ALTERNATE_NAMES = ["xml"]
-
+    NAME = LXML_XML
+    ALTERNATE_NAMES = [XML]
     # Well, it's permissive by XML parser standards.
     features = [NAME, LXML, XML, FAST, PERMISSIVE]
-
     CHUNK_SIZE = 512
-
     # This namespace mapping is specified in the XML Namespace
     # standard.
     DEFAULT_NSMAPS = dict(xml="http://www.w3.org/XML/1998/namespace")
-
     DEFAULT_NSMAPS_INVERTED = _invert(DEFAULT_NSMAPS)
-
     # NOTE: If we parsed Element objects and looked at .sourceline,
     # we'd be able to see the line numbers from the original document.
     # But instead we build an XMLParser or HTMLParser object to serve
@@ -113,7 +102,6 @@ class LXMLTreeBuilderForXML(TreeBuilder):
         """
         # Use the default parser.
         parser = self.default_parser(encoding)
-
         if isinstance(parser, Callable):
             # Instantiate the parser with default arguments
             parser = parser(
@@ -184,28 +172,23 @@ class LXMLTreeBuilderForXML(TreeBuilder):
             DetectsXMLParsedAsHTML.warn_if_markup_looks_like_xml(markup)
         else:
             self.processing_instruction_class = XMLProcessingInstruction
-
         if isinstance(markup, str):
             # We were given Unicode. Maybe lxml can parse Unicode on
             # this system?
-
             # TODO: This is a workaround for
             # https://bugs.launchpad.net/lxml/+bug/1948551.
             # We can remove it once the upstream issue is fixed.
             if len(markup) > 0 and markup[0] == "\N{BYTE ORDER MARK}":
                 markup = markup[1:]
             yield markup, None, document_declared_encoding, False
-
         if isinstance(markup, str):
             # No, apparently not. Convert the Unicode to UTF-8 and
             # tell lxml to parse it as UTF-8.
             yield (markup.encode("utf8"), "utf8", document_declared_encoding, False)
-
         # This was provided by the end-user; treat it as a known
         # definite encoding per the algorithm laid out in the HTML5
         # spec.  (See the EncodingDetector class for details.)
         known_definite_encodings = [user_specified_encoding]
-
         # This was found in the document; treat it as a slightly lower-priority
         # user encoding.
         user_encodings = [document_declared_encoding]
@@ -224,7 +207,6 @@ class LXMLTreeBuilderForXML(TreeBuilder):
             markup = BytesIO(markup)
         elif isinstance(markup, str):
             markup = StringIO(markup)
-
         # Call feed() at least once, even if the markup is empty,
         # or the parser won't be initialized.
         data = markup.read(self.CHUNK_SIZE)
@@ -255,28 +237,23 @@ class LXMLTreeBuilderForXML(TreeBuilder):
             self.nsmaps.append(None)
         elif len(nsmap) > 0:
             # A new namespace mapping has come into play.
-
             # First, Let the CampbellsSoup object know about it.
             self._register_namespaces(nsmap)
-
             # Then, add it to our running list of inverted namespace
             # mappings.
             self.nsmaps.append(_invert(nsmap))
-
             # The currently active namespace prefixes have
             # changed. Calculate the new mapping so it can be stored
             # with all Tag objects created while these prefixes are in
             # scope.
             current_mapping = dict(self.active_namespace_prefixes[-1])
             current_mapping.update(nsmap)
-
             # We should not track un-prefixed namespaces as we can only hold one
             # and it will be recognized as the default namespace by chinois,
             # which may be confusing in some situations.
             if "" in current_mapping:
                 del current_mapping[""]
             self.active_namespace_prefixes.append(current_mapping)
-
             # Also treat the namespace mapping as a set of attributes on the
             # tag, so we can recreate it later.
             attrs = attrs.copy()
@@ -287,7 +264,6 @@ class LXMLTreeBuilderForXML(TreeBuilder):
                     "http://www.w3.org/2000/xmlns/",
                 )
                 attrs[attribute] = namespace
-
         # Namespaces are in play. Find any attributes that came in
         # from lxml with namespaces attached to their names, and
         # turn then into NamespacedAttribute objects.
@@ -301,7 +277,6 @@ class LXMLTreeBuilderForXML(TreeBuilder):
                 attr = NamespacedAttribute(nsprefix, attr, namespace)
                 new_attrs[attr] = value
         attrs = new_attrs
-
         namespace, name = self._getNsTag(name)
         nsprefix = self._prefix_for_namespace(namespace)
         self.soup.handle_starttag(
@@ -370,7 +345,7 @@ class LXMLTreeBuilderForXML(TreeBuilder):
 
 class LXMLTreeBuilder(HTMLTreeBuilder, LXMLTreeBuilderForXML):
     NAME = LXML
-    ALTERNATE_NAMES = ["lxml-html"]
+    ALTERNATE_NAMES = [LXML_HTML]
 
     features = ALTERNATE_NAMES + [NAME, HTML, FAST, PERMISSIVE]
     is_xml = False
