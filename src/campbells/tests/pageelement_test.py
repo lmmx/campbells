@@ -211,7 +211,7 @@ class TestFormatters(SoupTest):
         encoded = soup.b.encode("utf-8")
         assert encoded == markup.encode("utf-8")
 
-    def test_encoding_substitution(self):
+    def test_encoding_substitution_correct(self):
         # Here's the <meta> tag saying that a document is
         # encoded in Shift-JIS.
         meta_tag = (
