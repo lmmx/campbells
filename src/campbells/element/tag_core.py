@@ -1399,8 +1399,8 @@ class Tag(PageElement):
                 continue
             if strip:
                 descendant = descendant.strip()
-                if len(descendant) == 0:
-                    continue
+            if len(descendant) == 0:
+                continue
             yield descendant
 
     strings = property(_all_strings)
