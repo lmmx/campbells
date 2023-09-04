@@ -142,79 +142,17 @@ class CampbellsSoup(Tag):
          TreeBuilder by passing in arguments, not just by saying which
          one to use.
         """
-        if "convertEntities" in kwargs:
-            del kwargs["convertEntities"]
-            warnings.warn(
-                "BS4 does not respect the convertEntities argument to the "
-                "CampbellsSoup constructor. Entities are always converted "
-                "to Unicode characters.",
-            )
-
-        if "markupMassage" in kwargs:
-            del kwargs["markupMassage"]
-            warnings.warn(
-                "BS4 does not respect the markupMassage argument to the "
-                "CampbellsSoup constructor. The tree builder is responsible "
-                "for any necessary markup massage.",
-            )
-
-        if "smartQuotesTo" in kwargs:
-            del kwargs["smartQuotesTo"]
-            warnings.warn(
-                "BS4 does not respect the smartQuotesTo argument to the "
-                "CampbellsSoup constructor. Smart quotes are always converted "
-                "to Unicode characters.",
-            )
-
-        if "selfClosingTags" in kwargs:
-            del kwargs["selfClosingTags"]
-            warnings.warn(
-                "BS4 does not respect the selfClosingTags argument to the "
-                "CampbellsSoup constructor. The tree builder is responsible "
-                "for understanding self-closing tags.",
-            )
-
-        if "isHTML" in kwargs:
-            del kwargs["isHTML"]
-            warnings.warn(
-                "BS4 does not respect the isHTML argument to the "
-                "CampbellsSoup constructor. Suggest you use "
-                "features='lxml' for HTML and features='lxml-xml' for "
-                "XML.",
-            )
-
-        def deprecated_argument(old_name, new_name):
-            if old_name in kwargs:
-                warnings.warn(
-                    'The "%s" argument to the CampbellsSoup constructor '
-                    'has been renamed to "%s."' % (old_name, new_name),
-                    DeprecationWarning,
-                    stacklevel=3,
-                )
-                return kwargs.pop(old_name)
-            return None
-
-        parse_only = parse_only or deprecated_argument("parseOnlyThese", "parse_only")
-
-        from_encoding = from_encoding or deprecated_argument(
-            "fromEncoding",
-            "from_encoding",
-        )
-
         if from_encoding and isinstance(markup, str):
             warnings.warn(
                 "You provided Unicode markup but also provided a value for from_encoding. Your from_encoding will be ignored.",
             )
             from_encoding = None
-
         self.element_classes = element_classes or dict()
-
         # We need this information to track whether or not the builder
         # was specified well enough that we can omit the 'you need to
         # specify a parser' warning.
         original_builder = builder
         original_features = features
-
         if isinstance(builder, type):
             # A builder class was passed in; it needs to be instantiated.
             builder_class = builder
@@ -231,7 +169,6 @@ class CampbellsSoup(Tag):
                     "requested: %s. Do you need to install a parser library?"
                     % ",".join(features),
                 )
-
         # At this point either we have a TreeBuilder instance in
         # builder, or we have a builder_class that we can instantiate
         # with the remaining **kwargs.
@@ -247,11 +184,7 @@ class CampbellsSoup(Tag):
             ):
                 # The user did not tell us which TreeBuilder to use,
                 # and we had to guess. Issue a warning.
-                if builder.is_xml:
-                    markup_type = "XML"
-                else:
-                    markup_type = "HTML"
-
+                markup_type = "XML" if builder.is_xml else "HTML"
                 # This code adapted from warnings.py so that we get the same line
                 # of code as our warnings.warn() call gets, even if the answer is wrong
                 # (as it may be in a multithreading situation).
@@ -290,13 +223,11 @@ class CampbellsSoup(Tag):
                 warnings.warn(
                     "Keyword arguments to the CampbellsSoup constructor will be ignored. These would normally be passed into the TreeBuilder constructor, but a TreeBuilder instance was passed in as `builder`.",
                 )
-
         self.builder = builder
         self.is_xml = builder.is_xml
         self.known_xml = self.is_xml
         self._namespaces = dict()
         self.parse_only = parse_only
-
         if hasattr(markup, "read"):  # It's a file-type object.
             markup = markup.read()
         elif len(markup) <= 256 and (
@@ -309,7 +240,6 @@ class CampbellsSoup(Tag):
             # since that is sometimes the intended behavior.
             if not self._markup_is_url(markup):
                 self._markup_resembles_filename(markup)
-
         rejections = []
         success = False
         for (
@@ -330,14 +260,14 @@ class CampbellsSoup(Tag):
                 break
             except ParserRejectedMarkup as e:
                 rejections.append(e)
-
         if not success:
             other_exceptions = [str(e) for e in rejections]
             raise ParserRejectedMarkup(
-                "The markup you provided was rejected by the parser. Trying a different parser or a different encoding may help.\n\nOriginal exception(s) from parser:\n "
+                "The markup you provided was rejected by the parser. "
+                + "Trying a different parser or a different encoding may help.\n\n"
+                + "Original exception(s) from parser:\n "
                 + "\n ".join(other_exceptions),
             )
-
         # Clear out the markup and remove the builder's circular
         # reference to this object.
         self.markup = None
@@ -475,10 +405,8 @@ class CampbellsSoup(Tag):
             self.popTag()
 
     def reset(self):
-        """Reset this object to a state as though it had never parsed any
-        markup.
-        """
-        Tag.__init__(self, self, self.builder, self.ROOT_TAG_NAME)
+        """Reset this object to a state as though it had never parsed any markup."""
+        Tag.__init__(self, parser=self, builder=self.builder, name=self.ROOT_TAG_NAME)
         self.hidden = 1
         self.builder.reset()
         self.current_data = []

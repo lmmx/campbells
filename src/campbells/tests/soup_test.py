@@ -73,12 +73,7 @@ class TestConstructor(SoupTest):
             def prepare_markup(self, *args, **kwargs):
                 yield "prepared markup", "original encoding", "declared encoding", "contains replacement characters"
 
-        kwargs = dict(
-            var="value",
-            # This is a deprecated BS3-era keyword argument, which
-            # will be stripped out.
-            convertEntities=True,
-        )
+        kwargs = dict(var="value")
         with warnings.catch_warnings(record=True):
             soup = CampbellsSoup("", builder=Mock, **kwargs)
         assert isinstance(soup.builder, Mock)
@@ -301,29 +296,6 @@ class TestWarnings(SoupTest):
         with warnings.catch_warnings(record=True) as w:
             soup = self.soup("<a><b></b></a>")
         assert [] == w
-
-    def test_parseOnlyThese_renamed_to_parse_only(self):
-        with warnings.catch_warnings(record=True) as w:
-            soup = CampbellsSoup(
-                "<a><b></b></a>",
-                "html.parser",
-                parseOnlyThese=SoupStrainer("b"),
-            )
-        warning = self._assert_warning(w, DeprecationWarning)
-        msg = str(warning.message)
-        assert "parseOnlyThese" in msg
-        assert "parse_only" in msg
-        assert b"<b></b>" == soup.encode()
-
-    def test_fromEncoding_renamed_to_from_encoding(self):
-        with warnings.catch_warnings(record=True) as w:
-            utf8 = b"\xc3\xa9"
-            soup = CampbellsSoup(utf8, "html.parser", fromEncoding="utf8")
-        warning = self._assert_warning(w, DeprecationWarning)
-        msg = str(warning.message)
-        assert "fromEncoding" in msg
-        assert "from_encoding" in msg
-        assert "utf8" == soup.original_encoding
 
     def test_unrecognized_keyword_argument(self):
         with pytest.raises(TypeError):
