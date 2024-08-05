@@ -1,4 +1,5 @@
 """Tests of the campbells.element.PageElement class"""
+
 import copy
 import pickle
 import sys

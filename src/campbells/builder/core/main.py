@@ -26,6 +26,7 @@ and 5 class variables
 - `USE_DEFAULT`
 - `TRACKS_LINE_NUMBERS`
 """
+
 from collections import defaultdict
 
 from campbells.element import nonwhitespace_re
